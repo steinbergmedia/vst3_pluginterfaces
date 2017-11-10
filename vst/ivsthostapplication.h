@@ -1,6 +1,5 @@
 //------------------------------------------------------------------------
 // Project     : VST SDK
-// Version     : 3.6.7
 //
 // Category    : Interfaces
 // Filename    : pluginterfaces/vst/ivsthostapplication.h
@@ -27,6 +26,7 @@ namespace Vst {
 \ingroup vstIHost vst300
 - [host imp]
 - [passed as 'context' in to IPluginBase::initialize () ]
+- [released: 3.0.0]
 
 Basic VST host application interface. */
 //------------------------------------------------------------------------
@@ -62,6 +62,7 @@ inline IMessage* allocateMessage (IHostApplication* host)
 \ingroup vstIHost vst310
 - [host imp]
 - [passed as 'context' to IPluginBase::initialize () ]
+- [released: 3.1.0]
 
 Informs the Plug-in that a VST 3 to VST 2 wrapper is used between the Plug-in and the real host.
 Implemented by the VST 2 Wrapper. */
@@ -80,6 +81,7 @@ DECLARE_CLASS_IID (IVst3ToVst2Wrapper, 0x29633AEC, 0x1D1C47E2, 0xBB85B97B, 0xD36
 \ingroup vstIHost vst310
 - [host imp]
 - [passed as 'context' to IPluginBase::initialize () ]
+- [released: 3.1.0]
 
 Informs the Plug-in that a VST 3 to AU wrapper is used between the Plug-in and the real host.
 Implemented by the AU Wrapper. */
@@ -92,6 +94,24 @@ public:
 };
 
 DECLARE_CLASS_IID (IVst3ToAUWrapper, 0xA3B8C6C5, 0xC0954688, 0xB0916F0B, 0xB697AA44)
+
+//------------------------------------------------------------------------
+/** VST 3 to AAX Wrapper Interface.
+\ingroup vstIHost vst368
+- [host imp]
+- [passed as 'context' to IPluginBase::initialize () ]
+- [released: 3.6.8]
+
+Informs the Plug-in that a VST 3 to AAX wrapper is used between the Plug-in and the real host.
+Implemented by the AAX Wrapper. */
+//------------------------------------------------------------------------
+class IVst3ToAAXWrapper : public FUnknown
+{
+public:
+	//------------------------------------------------------------------------
+	static const FUID iid;
+};
+DECLARE_CLASS_IID (IVst3ToAAXWrapper, 0x6D319DC6, 0x60C56242, 0xB32C951B, 0x93BEF4C6)
 
 //------------------------------------------------------------------------
 } // namespace Vst

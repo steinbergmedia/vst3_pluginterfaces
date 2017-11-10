@@ -1,6 +1,5 @@
 //------------------------------------------------------------------------
 // Project     : VST SDK
-// Version     : 3.6.7
 //
 // Category    : Interfaces
 // Filename    : pluginterfaces/vst/ivsteditcontroller.h
@@ -210,6 +209,34 @@ public:
 };
 
 DECLARE_CLASS_IID (IComponentHandler2, 0xF040B4B3, 0xA36045EC, 0xABCDC045, 0xB4D5A2CC)
+
+//------------------------------------------------------------------------
+/** Extended Host callback interface IComponentHandlerBusActivation for an edit controller.
+\ingroup vstIHost vst368
+- [host imp]
+- [extends IComponentHandler]
+- [released: 3.6.8]
+
+Allows the Plug-in to request the host to activate or deactivate a specific bus, 
+if the host accepts it will call later on IComponent::activateBus (see \ref IComponent::activateBus). 
+Useful especially for Instrument with more than 1 outputs, where the user could request
+from the Plug-in UI a given output bus activation.
+
+\see \ref IComponentHandler */
+//------------------------------------------------------------------------
+class IComponentHandlerBusActivation : public FUnknown
+{
+public:
+	//------------------------------------------------------------------------
+	/** request the host to activate or deactivate a specific bus. */
+	virtual tresult PLUGIN_API requestBusActivation (MediaType type, BusDirection dir, int32 index,
+	                                                 TBool state) = 0;
+
+//------------------------------------------------------------------------
+	static const FUID iid;
+};
+
+DECLARE_CLASS_IID (IComponentHandlerBusActivation, 0x067D02C1, 0x5B4E274D, 0xA92D90FD, 0x6EAF7240)
 
 //------------------------------------------------------------------------
 /** Edit controller component interface.

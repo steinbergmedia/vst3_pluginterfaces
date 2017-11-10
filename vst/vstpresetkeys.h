@@ -1,6 +1,5 @@
 //------------------------------------------------------------------------
 // Project     : VST SDK
-// Version     : 3.6.7
 //
 // Category    : Interfaces
 // Filename    : pluginterfaces/vst/vstpresetkeys.h
@@ -39,6 +38,8 @@ const CString kCharacter	  = "MusicalCharacter";	///< eg. instrument nature (lik
 
 const CString kStateType	  = "StateType";		///< Type of the given state see \ref StateType : Project / Default Preset or Normal Preset
 const CString kFilePathStringType = "FilePathString";	///< Full file path string (if available) where the preset comes from (be sure to use a bigger string when asking for it (with 1024 characters))
+const CString kName			  = "Name";				///< name of the preset
+const CString kFileName		  = "FileName";			///< filename of the preset (including extension)
 /*@}*/
 };
 

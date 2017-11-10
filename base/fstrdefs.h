@@ -263,7 +263,7 @@ inline void str8ToStr16 (char16* dst, const char8* src, int32 n = -1)
 		pChr[0] = 0;
 		pChr[1] = src[i];
 #else
-		dst[i] = src[i];
+		dst[i] = static_cast<char16> (src[i]);
 #endif
 
 		if (src[i] == 0)

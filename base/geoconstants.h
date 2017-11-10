@@ -32,7 +32,7 @@ enum Direction
 	kNorthWest,
 	kNoDirection,  //same position or center point of a geometry
 
-	kNumberOfDirections
+	kNumberOfDirections,
 };
 
 //------------------------------------------------------------------------
@@ -40,6 +40,7 @@ enum Orientation
 {
 	kHorizontal,
 	kVertical,
+
 	kNumberOfOrientations
 };
 

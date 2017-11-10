@@ -166,21 +166,6 @@ FUID& FUID::operator = (const FUID& f)
 }
 
 //------------------------------------------------------------------------
-FUID& FUID::operator = (FIDString uid)
-{
-	memcpy (data, uid, sizeof (TUID));
-	return *this;
-}
-
-//------------------------------------------------------------------------
-FUID& FUID::operator = (TUID uid)
-{
-	memcpy (data, uid, sizeof (TUID));
-	return *this;
-}
-
-
-//------------------------------------------------------------------------
 void FUID::from4Int (uint32 l1, uint32 l2, uint32 l3, uint32 l4)
 {
 #if COM_COMPATIBLE
@@ -427,13 +412,6 @@ void FUID::print (char8* string, int32 style) const
 			break;
 	}
 }
-
-//------------------------------------------------------------------------
-void FUID::toTUID (TUID result) const
-{
-	memcpy (result, data, sizeof (TUID));
-}
-
 
 //------------------------------------------------------------------------
 //  helpers

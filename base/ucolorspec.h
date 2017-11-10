@@ -61,4 +61,46 @@ inline ColorComponent DenormalizeAlpha (double alphaNorm)   { return Denormalize
 /** } */
 inline ColorSpec StripAlpha (ColorSpec argb)               { return (argb & 0x00FFFFFF); }
 
+
+enum StandardColor	 //TODO_REFACTOR: change to enum class (c++11)
+{
+	kBlack = 0,
+	kWhite,
+	kGray5,
+	kGray10,
+	kGray20,
+	kGray30,
+	kGray40,
+	kGray50,
+	kGray60,
+	kGray70,
+	kGray80,
+	kGray90,
+	kRed,
+	kLtRed,
+	kDkRed,
+	kGreen,
+	kLtGreen,
+	kDkGreen,
+	kBlue,
+	kLtBlue,
+	kDkBlue,
+	kMagenta,
+	kLtMagenta,
+	kDkMagenta,
+	kYellow,
+	kLtYellow,
+	kDkYellow,
+	kOrange,
+	kLtOrange,
+	kDkOrange,
+	kGold,
+	kBlack50,
+	kBlack70,
+	kNumStandardColors,
+	kLtGray = kGray20,
+	kGray = kGray50,
+	kDkGray = kGray70
+};
+
 }

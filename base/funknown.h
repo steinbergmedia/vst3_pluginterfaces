@@ -213,7 +213,7 @@ int32 PLUGIN_API atomicAdd (int32& value, int32 amount);
 }
 
 //------------------------------------------------------------------------
-/** Handling 16 Byte Globaly Unique Identifiers.
+/** Handling 16 Byte Globally Unique Identifiers.
 \ingroup pluginBase
 
 Each interface declares its identifier as static member inside the interface
@@ -225,7 +225,6 @@ class FUID
 public:
 //------------------------------------------------------------------------
 	FUID ();
-	inline FUID (const TUID uid);
 	FUID (uint32 l1, uint32 l2, uint32 l3, uint32 l4);
 	FUID (const FUID&);
 	virtual ~FUID () {}
@@ -234,7 +233,6 @@ public:
 	FUID (FUID&& other);
 	FUID& operator= (FUID&& other);
 #endif
-
 
 	/** Generates a new Unique Identifier (UID).
 	    Will return true for success. If the return value is false, either no
@@ -246,23 +244,10 @@ public:
 	bool isValid () const;
 
 	FUID& operator = (const FUID& f);
-	FUID& operator = (FIDString uid);
-	FUID& operator = (TUID uid);
-
 	bool operator == (const FUID& f) const { return ::Steinberg::FUnknownPrivate::iidEqual (data, f.data); }
-	bool operator == (FIDString uid) const { return ::Steinberg::FUnknownPrivate::iidEqual (data, uid); }
-	bool operator == (TUID uid) const { return ::Steinberg::FUnknownPrivate::iidEqual (data, uid); }
-
 	bool operator < (const FUID& f) const { return memcmp (data, f.data, sizeof (TUID)) < 0; }
-	bool operator < (FIDString uid) const { return memcmp (data, uid, sizeof (TUID)) < 0; }
-	bool operator < (TUID uid) const { return memcmp (data, uid, sizeof (TUID)) < 0; }
-
 	bool operator != (const FUID& f) const   { return !::Steinberg::FUnknownPrivate::iidEqual (data, f.data); }
-	bool operator != (FIDString uid) const { return !::Steinberg::FUnknownPrivate::iidEqual (data, uid); }
-	bool operator != (TUID uid) const { return !::Steinberg::FUnknownPrivate::iidEqual (data, uid); }
 
-	operator FIDString () const { return data; }
-	operator char* () { return data; }
 
  	uint32 getLong1 () const;
  	uint32 getLong2 () const;
@@ -303,11 +288,24 @@ public:
 		\param style can be chosen from the FUID::UIDPrintStyle enumeration. */
 	void print (char8* string = 0, int32 style = kINLINE_UID) const;
 
-	void toTUID (TUID result) const;
-
-	inline const TUID& toTUID () const
+	template<size_t N>
+	inline explicit FUID (const int8 (&uid)[N])
 	{
-		return data;
+#if SMTG_CPP11_STDLIBSUPPORT
+		static_assert (N == sizeof (TUID), "only TUID allowed");
+#endif
+		memcpy (data, uid, sizeof (TUID));
+	}
+	inline void toTUID (TUID result) const { memcpy (result, data, sizeof (TUID)); }
+	inline operator const TUID& () const { return data; }
+	inline const TUID& toTUID () const { return data; }
+	
+	static FUID fromTUID (const TUID uid)
+	{
+		FUID res;
+		if (uid)
+			memcpy (res.data, uid, sizeof (TUID));
+		return res;
 	}
 
 //------------------------------------------------------------------------
@@ -315,14 +313,17 @@ protected:
 	TUID data;
 };
 
-//------------------------------------------------------------------------
-inline FUID::FUID (const TUID uid)
+#if SMTG_CPP11_STDLIBSUPPORT
+template<typename T>
+inline bool operator== (const FUID& f1, T f2)
 {
-	memset (data, 0, sizeof (TUID));
-	if (uid)
-		memcpy (data, uid, sizeof (TUID));
+	static_assert (
+	    std::is_same<typename std::remove_cv<T>::type, FUID>::value,
+	    "Do not compare a FUID with a TUID directly. Either convert the TUID to a FUID and compare them or use FUnknownPrivate::iidEqual");
+	return f1.operator== (f2);
 }
-
+#endif
+	
 //------------------------------------------------------------------------
 // FUnknown
 //------------------------------------------------------------------------
