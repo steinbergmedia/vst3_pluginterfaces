@@ -20,11 +20,11 @@
 
 #include <stdio.h>
 
-#if WINDOWS
+#if SMTG_OS_WINDOWS
 #include <objbase.h>
 #endif
 
-#if MAC
+#if SMTG_OS_MACOS
 #include <CoreFoundation/CoreFoundation.h>
 #include <libkern/OSAtomic.h>
 
@@ -35,7 +35,7 @@
 
 #endif
 
-#if LINUX
+#if SMTG_OS_LINUX
 #include <ext/atomicity.h>
 #endif
 
@@ -43,7 +43,7 @@ namespace Steinberg {
 
 //------------------------------------------------------------------------
 #if COM_COMPATIBLE
-#if WINDOWS
+#if SMTG_OS_WINDOWS
 #define GuidStruct GUID
 #else
 struct GuidStruct
@@ -67,11 +67,11 @@ namespace FUnknownPrivate {
 //------------------------------------------------------------------------
 int32 PLUGIN_API atomicAdd (int32& var, int32 d)
 {
-#if WINDOWS
+#if SMTG_OS_WINDOWS
 	return InterlockedExchangeAdd (&var, d) + d;
-#elif MAC
+#elif SMTG_OS_MACOS
 	return OSAtomicAdd32Barrier (d, (int32_t*)&var);
-#elif LINUX
+#elif SMTG_OS_LINUX
 	__gnu_cxx::__atomic_add (&var, d);
 	return var;
 #else
@@ -119,7 +119,7 @@ FUID& FUID::operator= (FUID&& other)
 //------------------------------------------------------------------------
 bool FUID::generate ()
 {
-#if WINDOWS
+#if SMTG_OS_WINDOWS
 	GUID guid;
 	HRESULT hr = CoCreateGuid (&guid);
 	switch (hr)
@@ -133,7 +133,7 @@ bool FUID::generate ()
 			return false;
 	}
 
-#elif MAC
+#elif SMTG_OS_MACOS
 	CFUUIDRef uuid = CFUUIDCreate (kCFAllocatorDefault);
 	if (uuid)
 	{
@@ -380,12 +380,12 @@ void FUID::print (char8* string, int32 style) const
 		char8 str [128];
 		print (str, style);
 
-		#if WINDOWS
+#if SMTG_OS_WINDOWS
 		OutputDebugStringA (str);
 		OutputDebugStringA ("\n");
-		#else
+#else
 		fprintf (stdout, "%s\n", str);
-		#endif
+#endif
 		return;
 	}
 

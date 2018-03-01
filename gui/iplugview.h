@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "../base/funknown.h"
+#include "pluginterfaces/base/funknown.h"
 
 namespace Steinberg {
 
@@ -204,7 +204,7 @@ public:
 
 DECLARE_CLASS_IID (IPlugFrame, 0x367FAF01, 0xAFA94693, 0x8D4DA2A0, 0xED0882A3)
 
-#if LINUX
+#if SMTG_OS_LINUX
 //------------------------------------------------------------------------
 namespace Linux {
 
@@ -254,7 +254,7 @@ On Linux the host has to provide this interface to the plug-in as there's no glo
 defined as on other platforms.
 
 A plug-in can register an event handler for a file descriptor. The host has to call the event
-handler when the file descriptor is marked readable or writable.
+handler when the file descriptor is marked readable.
 
 A plug-in also can register a timer which will be called repeatedly until it is unregistered.
 */

@@ -149,7 +149,7 @@ namespace Steinberg {
 
 //------------------------------------------------------------------------
 #if COM_COMPATIBLE
-#if WINDOWS
+#if SMTG_OS_WINDOWS
 enum
 {
 	kNoInterface		= static_cast<tresult>(0x80004002L),	// E_NOINTERFACE
@@ -261,7 +261,16 @@ public:
 
 	/** Converts UID to a string.
 		The string will be 32 characters long, representing the hexadecimal values
-		of each data byte (e.g. "9127BE30160E4BB69966670AA6087880"). */
+		of each data byte (e.g. "9127BE30160E4BB69966670AA6087880"). 
+		
+		Typical use-case is:
+		\code
+		char8[33] strUID = {0};
+		FUID uid;
+		if (uid.generate ())
+			uid.toString (strUID);
+		\endcode
+		*/
 	void toString (char8* string) const;
 
 	/** Sets the UID data from a string.

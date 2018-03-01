@@ -23,7 +23,7 @@
 namespace Steinberg {
 
 class FUnknown;
-    
+
 //------------------------------------------------------------------------
 //  FVariant struct declaration
 //------------------------------------------------------------------------
@@ -171,7 +171,7 @@ public:
 //------------------------------------------------------------------------
 inline bool operator== (const FVariant& v1, const FVariant& v2)
 {
-#if PLATFORM_64
+#if SMTG_PLATFORM_64
 	return v1.type == v2.type && v1.intValue == v2.intValue;
 #else
 	if (v1.type != v2.type)

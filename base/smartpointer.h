@@ -18,7 +18,7 @@
 
 #include "pluginterfaces/base/fplatform.h"
 #if SMTG_CPP11_STDLIBSUPPORT
-#include <memory>
+#include <utility>
 #endif
 
 //------------------------------------------------------------------------
@@ -75,13 +75,17 @@ public:
 	inline I* get () const { return ptr; }
 
 #if SMTG_CPP11_STDLIBSUPPORT
-	inline IPtr (IPtr<I>&& movePtr) noexcept : ptr (nullptr) { *this = std::move (movePtr); }
-	inline IPtr& operator= (IPtr<I>&& movePtr)
+	inline IPtr (IPtr<I>&& movePtr) SMTG_NOEXCEPT : ptr (movePtr.take ()) { }
+	
+	template <typename T>
+	inline IPtr (IPtr<T>&& movePtr) SMTG_NOEXCEPT : ptr (movePtr.take ()) {  }
+
+	inline IPtr& operator= (IPtr<I>&& movePtr) SMTG_NOEXCEPT
 	{
 		if (ptr)
 			ptr->release ();
-		ptr = movePtr.ptr;
-		movePtr.ptr = nullptr;
+
+		ptr = movePtr.take ();
 		return *this;
 	}
 
@@ -92,7 +96,7 @@ public:
 		ptr = obj;
 	}
 
-	I* take () 
+	I* take () SMTG_NOEXCEPT 
 	{
 		I* out = ptr; 
 		ptr = nullptr; 

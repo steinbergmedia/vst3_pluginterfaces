@@ -17,6 +17,7 @@
 #pragma once
 
 #include "ivstcomponent.h"
+#include "vstspeaker.h"
 
 //------------------------------------------------------------------------
 #include "pluginterfaces/base/falignpush.h"

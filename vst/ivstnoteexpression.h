@@ -66,7 +66,7 @@ struct NoteExpressionValueDescription
 	int32 stepCount;						///< number of discrete steps (0: continuous, 1: toggle, discrete value otherwise - see \ref vst3parameterIntro)
 };
 
-#if WINDOWS && !PLATFORM_64
+#if SMTG_OS_WINDOWS && !SMTG_PLATFORM_64
 #include "pluginterfaces/vst/vstpshpack4.h"
 #endif
 //------------------------------------------------------------------------
@@ -104,7 +104,7 @@ struct NoteExpressionTextEvent
 	const TChar* text;				///< UTF-16, null terminated
 };
 
-#if WINDOWS && !PLATFORM_64
+#if SMTG_OS_WINDOWS && !SMTG_PLATFORM_64
 #include "pluginterfaces/base/falignpop.h"
 #endif
 
