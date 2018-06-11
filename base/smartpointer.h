@@ -103,6 +103,9 @@ public:
 		return out;
 	}
 
+	template <typename T>
+	static IPtr<T> adopt (T* obj) SMTG_NOEXCEPT { return IPtr<T> (obj, false); }
+
 #endif
 //------------------------------------------------------------------------
 protected:
@@ -135,8 +138,11 @@ inline IPtr<I>::IPtr () : ptr (0)
 template <class I>
 inline IPtr<I>::~IPtr ()
 {
-	if (ptr)
+	if (ptr) 
+	{
 		ptr->release ();
+		ptr = nullptr;  //TODO_CORE: how much does this cost? is this something hiding for us?
+	}
 }
 
 //------------------------------------------------------------------------
