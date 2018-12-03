@@ -308,6 +308,7 @@ DECLARE_CLASS_IID (IAudioProcessor, 0x42043F99, 0xB7DA453C, 0xA569E79D, 0x9AAEC3
 - [plug imp]
 - [extends IAudioProcessor]
 - [released: 3.1.0]
+- [optional]
 
 Inform the Plug-in about how long from the moment of generation/acquiring (from file or from Input)
 it will take for its input to arrive, and how long it will take for its output to be presented (to output or to Speaker).

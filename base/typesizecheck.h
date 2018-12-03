@@ -22,22 +22,22 @@
 /** Check the size of a structure depending on compilation platform
  *	Used to check that structure sizes don't change between SDK releases.
  */
-#define SMTG_TYPE_SIZE_CHECK(Type, Platform64Size, MacOS32Size, Win32Size)                         \
-	namespace {                                                                                    \
-	template <typename Type, size_t x, size_t y, size_t z>                                         \
-	struct SizeCheck##Type                                                                         \
-	{                                                                                              \
-		constexpr SizeCheck##Type ()                                                               \
-		{                                                                                          \
-			static_assert (sizeof (Type) == (SMTG_PLATFORM_64 ? x : SMTG_OS_MACOS ? y : z),        \
-			               "Struct Size Error: " #Type);                                           \
-		}                                                                                          \
-	};                                                                                             \
-	static constexpr SizeCheck##Type<Type, Platform64Size, MacOS32Size, Win32Size> instance##Type; \
+#define SMTG_TYPE_SIZE_CHECK(Type, Platform64Size, MacOS32Size, Win32Size, Linux32Size)                         \
+	namespace {                                                                                                 \
+	template <typename Type, size_t w, size_t x, size_t y, size_t z>                                            \
+	struct SizeCheck##Type                                                                                      \
+	{                                                                                                           \
+		constexpr SizeCheck##Type ()                                                                            \
+		{                                                                                                       \
+			static_assert (sizeof (Type) == (SMTG_PLATFORM_64 ? w : SMTG_OS_MACOS ? x : SMTG_OS_LINUX ? z : y), \
+			               "Struct Size Error: " #Type);                                                        \
+		}                                                                                                       \
+	};                                                                                                          \
+	static constexpr SizeCheck##Type<Type, Platform64Size, MacOS32Size, Win32Size, Linux32Size> instance##Type; \
 	}
 
 #else
 // need static_assert
-#define SMTG_TYPE_SIZE_CHECK(Type, Platform64Size, MacOS32Size, Win32Size)
+#define SMTG_TYPE_SIZE_CHECK(Type, Platform64Size, MacOS32Size, Win32Size, Linux32Size)
 #endif
 

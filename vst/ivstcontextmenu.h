@@ -35,6 +35,7 @@ class IContextMenu;
 - [host imp]
 - [extends IComponentHandler]
 - [released: 3.5.0]
+- [optional]
 
 A Plug-in can ask the host to create a context menu for a given exported Parameter ID or a generic context menu.\n
 
@@ -131,6 +132,7 @@ DECLARE_CLASS_IID (IComponentHandler3, 0x69F11617, 0xD26B400D, 0xA4B6B964, 0x7B6
 - [host imp]
 - [plug imp]
 - [released: 3.5.0]
+- [optional]
 
 A receiver of a menu item should implement this interface, which will be called after the user has selected
 this menu item.
@@ -171,6 +173,7 @@ struct IContextMenuItem
 - [host imp]
 - [create with IComponentHandler3::createContextMenu(..)]
 - [released: 3.5.0]
+- [optional]
 
 A context menu is composed of Item (entry). A Item is defined by a name, a tag, a flag
 and a associated target (called when this item will be selected/executed). 

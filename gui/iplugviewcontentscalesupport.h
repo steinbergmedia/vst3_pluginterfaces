@@ -41,7 +41,9 @@ The host could call setContentScaleFactor in a different context, for example: s
 plug-in editor for better readability.
 When a plug-in handles this (by returning kResultTrue), it needs to scale the width and height of
 its view by the scale factor and inform the host via a IPlugFrame::resizeView(), the host will then
-call IPlugView::onSize()
+call IPlugView::onSize().
+
+Note that the host is allowed to call setContentScaleFactor() at any time the IPlugView is alive.
  */
 class IPlugViewContentScaleSupport : public FUnknown
 {

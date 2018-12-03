@@ -353,6 +353,7 @@ The SDK provides a class called FUID for this purpose.
 class FUnknown
 {
 public:
+
 //------------------------------------------------------------------------
 	/** Query for a pointer to the specified interface.
 	Returns kResultOk on success or kNoInterface if the object does not implement the interface.
@@ -374,6 +375,7 @@ public:
 	static const FUID iid;
 //------------------------------------------------------------------------
 };
+
 
 DECLARE_CLASS_IID (FUnknown, 0x00000000, 0x00000000, 0xC0000000, 0x00000046)
 

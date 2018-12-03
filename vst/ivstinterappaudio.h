@@ -31,6 +31,7 @@ class IInterAppAudioPresetManager;
 - [host imp]
 - [passed as 'context' to IPluginBase::initialize () ]
 - [released: 3.6.0]
+- [optional]
 
 Implemented by the InterAppAudio Wrapper. */
 //------------------------------------------------------------------------

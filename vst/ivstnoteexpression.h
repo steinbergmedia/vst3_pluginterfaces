@@ -47,7 +47,8 @@ enum NoteExpressionTypeIDs
 	kTextTypeID,			///< TODO:
 	kPhonemeTypeID,			///< TODO:
 
-	kCustomStart = 100000,	///< custom note change type ids must start from here
+	kCustomStart = 100000,	///< start of custom note expression type ids
+	kCustomEnd   = 200000,  ///< end of custom note expression type ids
 	
 	kInvalidTypeID = 0xFFFFFFFF		///< indicates an invalid note expression type
 };
