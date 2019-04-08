@@ -159,6 +159,15 @@ struct KeyCode
 	: character (character), virt (virt), modifier (modifier)
 	{
 	}
+
+	inline KeyCode& operator= (const KeyCode& other) SMTG_NOEXCEPT
+	{
+		character = other.character;
+		virt = other.virt;
+		modifier = other.modifier;
+
+		return *this;
+	}
 };
 
 /** Utility functions to handle key-codes. 
