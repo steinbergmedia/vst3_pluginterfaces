@@ -52,10 +52,10 @@ inline IMessage* allocateMessage (IHostApplication* host)
 {
 	TUID iid;
 	IMessage::iid.toTUID (iid);
-	IMessage* m = 0;
+	IMessage* m = nullptr;
 	if (host->createInstance (iid, iid, (void**)&m) == kResultOk)
 		return m;
-	return 0;
+	return nullptr;
 }
 
 //------------------------------------------------------------------------

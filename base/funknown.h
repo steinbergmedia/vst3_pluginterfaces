@@ -258,7 +258,7 @@ public:
 	void from4Int (uint32 d1, uint32 d2, uint32 d3, uint32 d4);
 	void to4Int (uint32& d1, uint32& d2, uint32& d3, uint32& d4) const;
 
-	typedef char8 String[64];
+	typedef char8 String[33];
 
 	/** Converts UID to a string.
 		The string will be 32 characters long, representing the hexadecimal values
@@ -408,6 +408,15 @@ public:
 	}
 	inline I* operator= (FUnknown* unknown);
 	inline I* getInterface () { return this->ptr; }
+
+#if SMTG_CPP11_STDLIBSUPPORT
+	inline FUnknownPtr (FUnknownPtr&& p) SMTG_NOEXCEPT : IPtr<I> (std::move (p)) {}
+	inline FUnknownPtr& operator= (FUnknownPtr&& p) SMTG_NOEXCEPT
+	{
+		IPtr<I>::operator= (std::move (p));
+		return *this;
+	}
+#endif
 };
 
 //------------------------------------------------------------------------

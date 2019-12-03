@@ -80,7 +80,7 @@ public:
 	template <typename T>
 	inline IPtr (IPtr<T>&& movePtr) SMTG_NOEXCEPT : ptr (movePtr.take ()) {  }
 
-	inline IPtr& operator= (IPtr<I>&& movePtr)
+	inline IPtr& operator= (IPtr<I>&& movePtr) SMTG_NOEXCEPT
 	{
 		if (ptr)
 			ptr->release ();
@@ -98,6 +98,7 @@ public:
 		ptr = movePtr.take ();
 		return *this;
 	}
+#endif
 
 	inline void reset (I* obj = nullptr) 
 	{
@@ -116,7 +117,6 @@ public:
 	template <typename T>
 	static IPtr<T> adopt (T* obj) SMTG_NOEXCEPT { return IPtr<T> (obj, false); }
 
-#endif
 //------------------------------------------------------------------------
 protected:
 	I* ptr;

@@ -274,13 +274,16 @@ public:
 		Note that for player live recording this latency should be zero or small. */
 	virtual uint32 PLUGIN_API getLatencySamples () = 0;
 
-	/** Called in disable state (not active) before processing will begin. */
+	/** Called in disable state (setActive not called with true) before setProcessing is called and processing will begin. */
 	virtual tresult PLUGIN_API setupProcessing (ProcessSetup& setup) = 0;
 
-	/** Informs the Plug-in about the processing state. This will be called before any process calls start with true and after with false.
-		Note that setProcessing (false) may be called after setProcessing (true) without any process calls.
-		In this call the Plug-in should do only light operation (no memory allocation or big setup reconfiguration), 
-		this could be used to reset some buffers (like Delay line or Reverb). */
+	/** Informs the Plug-in about the processing state. This will be called before any process calls
+	   start with true and after with false.
+	   Note that setProcessing (false) may be called after setProcessing (true) without any process
+	   calls. In this call the Plug-in should do only light operation (no memory allocation or big
+	   setup reconfiguration), this could be used to reset some buffers (like Delay line or Reverb).
+	   The host has to be sure that it is called only when the Plug-in is enable (setActive was
+	   called) */
 	virtual tresult PLUGIN_API setProcessing (TBool state) = 0;
 
 	/** The Process call, where all information (parameter changes, event, audio buffer) are passed. */

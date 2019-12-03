@@ -204,8 +204,8 @@ DECLARE_CLASS_IID (IUnitInfo, 0x3D4BD6B5, 0x913A4FD2, 0xA886E768, 0xA5EB92C1)
 - [released: 3.0.0]
 - [optional]
 
-A component can either support program list data via this interface or
-unit preset data (IUnitData), but not both!
+A component can support program list data via this interface or/and
+unit preset data (IUnitData).
 
 \see \ref vst3UnitPrograms */
 //------------------------------------------------------------------------
@@ -236,8 +236,8 @@ DECLARE_CLASS_IID (IProgramListData, 0x8683B01F, 0x7B354F70, 0xA2651DEC, 0x353AF
 - [released: 3.0.0]
 - [optional]
 
-A component can either support unit preset data via this interface or
-program list data (IProgramListData), but not both!
+A component can support unit preset data via this interface or
+program list data (IProgramListData).
 
 \see \ref vst3UnitPrograms */
 //------------------------------------------------------------------------

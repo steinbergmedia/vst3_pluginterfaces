@@ -26,7 +26,18 @@
 
 #if SMTG_OS_MACOS
 #include <CoreFoundation/CoreFoundation.h>
+
+#if defined(MAC_OS_X_VERSION_10_11) && defined(MAC_OS_X_VERSION_MIN_REQUIRED)
+#define SMTG_MACOS_USE_STDATOMIC (MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_11)
+#else
+#define SMTG_MACOS_USE_STDATOMIC 0
+#endif
+
+#if SMTG_MACOS_USE_STDATOMIC
+#include <stdatomic.h>
+#else
 #include <libkern/OSAtomic.h>
+#endif
 
 #if defined(__GNUC__) && (__GNUC__ >= 4) && !__LP64__
 // on 32 bit Mac OS X we can safely ignore the format warnings as sizeof(int) == sizeof(long)
@@ -36,7 +47,12 @@
 #endif
 
 #if SMTG_OS_LINUX
+#ifdef __ANDROID__
+#include <stdatomic.h>
+#else
 #include <ext/atomicity.h>
+#endif
+#include <stdlib.h>
 #endif
 
 namespace Steinberg {
@@ -70,7 +86,13 @@ int32 PLUGIN_API atomicAdd (int32& var, int32 d)
 #if SMTG_OS_WINDOWS
 	return InterlockedExchangeAdd (&var, d) + d;
 #elif SMTG_OS_MACOS
+#if SMTG_MACOS_USE_STDATOMIC
+	return atomic_fetch_add (reinterpret_cast<atomic_int_least32_t*> (&var), d) + d;
+#else
 	return OSAtomicAdd32Barrier (d, (int32_t*)&var);
+#endif
+#elif defined(__ANDROID__)
+	return atomic_fetch_add ((atomic_int*)&var, d) + d;
 #elif SMTG_OS_LINUX
 	__gnu_cxx::__atomic_add (&var, d);
 	return var;
@@ -147,6 +169,11 @@ bool FUID::generate ()
 	}
 	return false;
 
+#elif SMTG_OS_LINUX
+	srand ((size_t)this);
+	for (int32 i = 0; i < 16; i++)
+		data[i] = static_cast<unsigned char>(rand ());
+	return true;
 #else
 #warning implement me!
 	return false;

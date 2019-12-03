@@ -79,11 +79,10 @@ if (SKI_SDK)
 endif()
 
 target_include_directories(pluginterfaces PUBLIC
-    $<BUILD_INTERFACE: ${CMAKE_CURRENT_SOURCE_DIR}/..>
+    ${CMAKE_CURRENT_SOURCE_DIR}/..
 )
 
 smtg_setup_universal_binary(pluginterfaces)
-
 
 # iOS target
 if(SMTG_MAC AND XCODE AND SMTG_IOS_DEVELOPMENT_TEAM)

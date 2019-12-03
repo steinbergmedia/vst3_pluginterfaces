@@ -115,7 +115,11 @@
 		#ifndef SMTG_CPP11
 			#error unsupported compiler
 		#endif
-		#define SMTG_CPP11_STDLIBSUPPORT 1
+		#if defined(__GNUG__) && __GNUG__ < 8
+			#define SMTG_CPP11_STDLIBSUPPORT 0
+		#else
+			#define SMTG_CPP11_STDLIBSUPPORT 1
+		#endif
 		#define SMTG_HAS_NOEXCEPT 1
 	#endif
 //-----------------------------------------------------------------------------
@@ -209,8 +213,10 @@
 //-----------------------------------------------------------------------------
 #if SMTG_CPP11
 #define SMTG_OVERRIDE override
+#define SMTG_CONSTEXPR constexpr
 #else
 #define SMTG_OVERRIDE
+#define SMTG_CONSTEXPR
 #endif
 #if SMTG_HAS_NOEXCEPT
 #define SMTG_NOEXCEPT noexcept

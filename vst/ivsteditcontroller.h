@@ -110,16 +110,19 @@ class IComponentHandler: public FUnknown
 {
 public:
 //------------------------------------------------------------------------
-	/** To be called before calling a performEdit (e.g. on mouse-click-down event). */
+	/** To be called before calling a performEdit (e.g. on mouse-click-down event).
+	This must be called in the UI-Thread context!  */
 	virtual tresult PLUGIN_API beginEdit (ParamID id) = 0;
 
-	/** Called between beginEdit and endEdit to inform the handler that a given parameter has a new value. */
+	/** Called between beginEdit and endEdit to inform the handler that a given parameter has a new
+	 * value. This must be called in the UI-Thread context! */
 	virtual tresult PLUGIN_API performEdit (ParamID id, ParamValue valueNormalized) = 0;
 
-	/** To be called after calling a performEdit (e.g. on mouse-click-up event). */
+	/** To be called after calling a performEdit (e.g. on mouse-click-up event).
+	This must be called in the UI-Thread context! */
 	virtual tresult PLUGIN_API endEdit (ParamID id) = 0;
 
-	/** Instructs host to restart the component. This should be called in the UI-Thread context!
+	/** Instructs host to restart the component. This must be called in the UI-Thread context!
 	\param flags is a combination of RestartFlags */
 	virtual tresult PLUGIN_API restartComponent (int32 flags) = 0;
 
@@ -290,7 +293,8 @@ public:
 	virtual tresult PLUGIN_API setParamNormalized (ParamID id, ParamValue value) = 0;
 
 	// handler ----------------------------
-	/** Gets from host a handler. */
+	/** Gets from host a handler which allows the Plugin-in to communicate with the host.
+		Note: This is mandatory if the host is using the IEditController! */
 	virtual tresult PLUGIN_API setComponentHandler (IComponentHandler* handler) = 0;
 
 	// view -------------------------------

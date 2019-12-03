@@ -180,80 +180,94 @@ const SpeakerArrangement kAmbi3rdOrderACN = kAmbi2cdOrderACN | kSpeakerACN9 | kS
 /*-----------*/
 /* 3D formats */
 /*-----------*/
-/** L R Ls Rs Tfl Tfr Trl Trr */
+/** L R Ls Rs Tfl Tfr Trl Trr */						// 4.0.4
 const SpeakerArrangement k80Cube		   = kSpeakerL | kSpeakerR | kSpeakerLs | kSpeakerRs  | kSpeakerTfl| kSpeakerTfr| kSpeakerTrl | kSpeakerTrr;
-/** L R C Lfe Ls Rs Cs Tc */
+/** L R C Lfe Ls Rs Cs Tc */							// 6.1.1
 const SpeakerArrangement k71CineTopCenter  = kSpeakerL | kSpeakerR | kSpeakerC  | kSpeakerLfe | kSpeakerLs | kSpeakerRs | kSpeakerCs  | kSpeakerTc; 
-/** L R C Lfe Ls Rs Cs Tfc */
+/** L R C Lfe Ls Rs Cs Tfc */							// 6.1.1
 const SpeakerArrangement k71CineCenterHigh = kSpeakerL | kSpeakerR | kSpeakerC  | kSpeakerLfe | kSpeakerLs | kSpeakerRs | kSpeakerCs  | kSpeakerTfc; 
-/** L R C Lfe Ls Rs Tfl Tfr */
+/** L R C Lfe Ls Rs Tfl Tfr */							// 5.1.2
 const SpeakerArrangement k71CineFrontHigh  = kSpeakerL | kSpeakerR | kSpeakerC  | kSpeakerLfe | kSpeakerLs | kSpeakerRs | kSpeakerTfl | kSpeakerTfr; 
 const SpeakerArrangement k71MPEG3D		   = k71CineFrontHigh;
-/** L R C Lfe Ls Rs Tsl Tsr */
+/** L R C Lfe Ls Rs Tsl Tsr */							// 5.1.2
 const SpeakerArrangement k71CineSideHigh   = kSpeakerL | kSpeakerR | kSpeakerC  | kSpeakerLfe | kSpeakerLs | kSpeakerRs | kSpeakerTsl | kSpeakerTsr; 
 
-/** L R Lfe Ls Rs Tfl Tfc Tfr Bfc */
+/** L R Lfe Ls Rs Tfl Tfc Tfr Bfc */					// 4.1.4
 const SpeakerArrangement k81MPEG3D		 = kSpeakerL | kSpeakerR | kSpeakerLfe | kSpeakerLs | kSpeakerRs |
 										   kSpeakerTfl | kSpeakerTfc | kSpeakerTfr | kSpeakerBfc;
 
-/** L R C Ls Rs Tfl Tfr Trl Trr */
+/** L R C Ls Rs Tfl Tfr Trl Trr */						// 5.0.4
 const SpeakerArrangement k90			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLs  | kSpeakerRs |
 										   kSpeakerTfl| kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
 const SpeakerArrangement k50_4			 = k90;
-/** L R C Lfe Ls Rs Tfl Tfr Trl Trr */
+/** L R C Lfe Ls Rs Tfl Tfr Trl Trr */					// 5.1.4
 const SpeakerArrangement k91			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLfe | kSpeakerLs | kSpeakerRs  |
 										   kSpeakerTfl| kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
 const SpeakerArrangement k51_4			 = k91;
 
-/** L R C Lfe Ls Rs Sl Sr Tsl Tsr */
-const SpeakerArrangement k71_2			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLfe | kSpeakerLs |
-										   kSpeakerRs | kSpeakerSl | kSpeakerSr | kSpeakerTsl | kSpeakerTsr;
-const SpeakerArrangement k91Atmos		 = k71_2;
+/** L R C Ls Rs Sl Sr Tsl Tsr */						// 7.0.2
+const SpeakerArrangement k70_2			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLs | kSpeakerRs | 
+										   kSpeakerSl | kSpeakerSr | kSpeakerTsl | kSpeakerTsr;
 
-/** L R C Ls Rs Tc Tfl Tfr Trl Trr */
-const SpeakerArrangement k100			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLs  | kSpeakerRs | 
-										   kSpeakerTc | kSpeakerTfl | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
-/** L R C Lfe Ls Rs Tc Tfl Tfr Trl Trr */
-const SpeakerArrangement k101			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLfe | kSpeakerLs | kSpeakerRs  | 
-										   kSpeakerTc | kSpeakerTfl | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
-const SpeakerArrangement k101MPEG3D		 = k101;
+/** L R C Lfe Ls Rs Sl Sr Tsl Tsr */					// 7.1.2
+const SpeakerArrangement k71_2			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLfe | kSpeakerLs | kSpeakerRs | 
+										  kSpeakerSl | kSpeakerSr | kSpeakerTsl | kSpeakerTsr;
+const SpeakerArrangement k91Atmos		 = k71_2;		// 9.1 Dolby Atmos (3D)
 
-/** L R C Lfe Ls Rs Tfl Tfc Tfr Trl Trr Lfe2 */
-const SpeakerArrangement k102			 = kSpeakerL  | kSpeakerR | kSpeakerC  | kSpeakerLfe | kSpeakerLs | kSpeakerRs  |
-										   kSpeakerTfl| kSpeakerTfc | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr | kSpeakerLfe2;
-
-/** L R C Ls Rs Tc Tfl Tfc Tfr Trl Trr */
-const SpeakerArrangement k110			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLs  | kSpeakerRs |
-										   kSpeakerTc | kSpeakerTfl | kSpeakerTfc | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
-/** L R C Lfe Ls Rs Tc Tfl Tfc Tfr Trl Trr */
-const SpeakerArrangement k111			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLfe | kSpeakerLs | kSpeakerRs | 
-										   kSpeakerTc | kSpeakerTfl | kSpeakerTfc | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
-
-/** L R C Ls Rs Sl Sr Tfl Tfr Trl Trr */
+/** L R C Ls Rs Sl Sr Tfl Tfr Trl Trr */				// 7.0.4
 const SpeakerArrangement k70_4			 = kSpeakerL | kSpeakerR | kSpeakerC | kSpeakerLs | kSpeakerRs | kSpeakerSl | kSpeakerSr |
 										   kSpeakerTfl | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
 
-/** L R C Lfe Ls Rs Sl Sr Tfl Tfr Trl Trr */
+/** L R C Lfe Ls Rs Sl Sr Tfl Tfr Trl Trr */			// 7.1.4
 const SpeakerArrangement k71_4			 = kSpeakerL | kSpeakerR | kSpeakerC | kSpeakerLfe | kSpeakerLs | kSpeakerRs | kSpeakerSl | kSpeakerSr |
 										   kSpeakerTfl | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
 const SpeakerArrangement k111MPEG3D		 = k71_4;
 
-/** L R C Lfe Ls Rs Lc Rc Tfl Tfc Tfr Trl Trr Lfe2 */
+/** L R C Ls Rs Sl Sr Tfl Tfr Trl Trr Tsl Tsr */		// 7.0.6
+const SpeakerArrangement k70_6			 = kSpeakerL | kSpeakerR | kSpeakerC | 
+									       kSpeakerLs | kSpeakerRs | kSpeakerSl | kSpeakerSr | 
+										   kSpeakerTfl | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr | kSpeakerTsl | kSpeakerTsr;
+
+/** L R C Lfe Ls Rs Sl Sr Tfl Tfr Trl Trr Tsl Tsr */	// 7.1.6
+const SpeakerArrangement k71_6			 = kSpeakerL | kSpeakerR | kSpeakerC | kSpeakerLfe | 
+									       kSpeakerLs | kSpeakerRs | kSpeakerSl | kSpeakerSr | 
+										   kSpeakerTfl | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr | kSpeakerTsl | kSpeakerTsr;
+
+/** L R C Ls Rs Tc Tfl Tfr Trl Trr */					// 5.0.5
+const SpeakerArrangement k100			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLs  | kSpeakerRs | 
+										   kSpeakerTc | kSpeakerTfl | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
+/** L R C Lfe Ls Rs Tc Tfl Tfr Trl Trr */				// 5.1.5
+const SpeakerArrangement k101			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLfe | kSpeakerLs | kSpeakerRs  | 
+										   kSpeakerTc | kSpeakerTfl | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
+const SpeakerArrangement k101MPEG3D		 = k101;
+
+/** L R C Lfe Ls Rs Tfl Tfc Tfr Trl Trr Lfe2 */			// 5.2.5
+const SpeakerArrangement k102			 = kSpeakerL  | kSpeakerR | kSpeakerC  | kSpeakerLfe | kSpeakerLs | kSpeakerRs  |
+										   kSpeakerTfl| kSpeakerTfc | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr | kSpeakerLfe2;
+
+/** L R C Ls Rs Tc Tfl Tfc Tfr Trl Trr */				// 5.0.6
+const SpeakerArrangement k110			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLs  | kSpeakerRs |
+										   kSpeakerTc | kSpeakerTfl | kSpeakerTfc | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
+/** L R C Lfe Ls Rs Tc Tfl Tfc Tfr Trl Trr */			// 5.1.6
+const SpeakerArrangement k111			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLfe | kSpeakerLs | kSpeakerRs | 
+										   kSpeakerTc | kSpeakerTfl | kSpeakerTfc | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
+
+/** L R C Lfe Ls Rs Lc Rc Tfl Tfc Tfr Trl Trr Lfe2 */	// 7.2.5
 const SpeakerArrangement k122			 = kSpeakerL  | kSpeakerR | kSpeakerC  | kSpeakerLfe | kSpeakerLs | kSpeakerRs	| kSpeakerLc  | kSpeakerRc |
 										   kSpeakerTfl| kSpeakerTfc | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr | kSpeakerLfe2;
-/** L R C Ls Rs Sl Sr Tc Tfl Tfc Tfr Trl Trr */
+/** L R C Ls Rs Sl Sr Tc Tfl Tfc Tfr Trl Trr */			// 7.0.6
 const SpeakerArrangement k130			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLs  | kSpeakerRs | kSpeakerSl | kSpeakerSr |
 										   kSpeakerTc | kSpeakerTfl | kSpeakerTfc | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
-/** L R C Lfe Ls Rs Sl Sr Tc Tfl Tfc Tfr Trl Trr */
+/** L R C Lfe Ls Rs Sl Sr Tc Tfl Tfc Tfr Trl Trr */		// 7.1.6
 const SpeakerArrangement k131			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLfe | kSpeakerLs | kSpeakerRs | kSpeakerSl | kSpeakerSr |
 										   kSpeakerTc | kSpeakerTfl | kSpeakerTfc | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr;
 
-/** L R Ls Rs Sl Sr Tfl Tfr Trl Trr Bfl Bfr Brl Brr  */
+/** L R Ls Rs Sl Sr Tfl Tfr Trl Trr Bfl Bfr Brl Brr  */	// 6.0.4.4
 const SpeakerArrangement k140			 = kSpeakerL | kSpeakerR | kSpeakerLs | kSpeakerRs | kSpeakerSl | kSpeakerSr |
 										   kSpeakerTfl | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr |
 										   kSpeakerBfl | kSpeakerBfr | kSpeakerBrl | kSpeakerBrr;
 
-/** L R C Lfe Ls Rs Lc Rc Cs Sl Sr Tc Tfl Tfc Tfr Trl Trc Trr Lfe2 Tsl Tsr Bfl Bfc Bfr */
+/** L R C Lfe Ls Rs Lc Rc Cs Sl Sr Tc Tfl Tfc Tfr Trl Trc Trr Lfe2 Tsl Tsr Bfl Bfc Bfr */	// 10.2.9.3
 const SpeakerArrangement k222			 = kSpeakerL  | kSpeakerR | kSpeakerC  | kSpeakerLfe | kSpeakerLs | kSpeakerRs | kSpeakerLc | kSpeakerRc | kSpeakerCs | kSpeakerSl | kSpeakerSr | 
 										   kSpeakerTc | kSpeakerTfl | kSpeakerTfc | kSpeakerTfr | kSpeakerTrl | kSpeakerTrc | kSpeakerTrr | kSpeakerLfe2 | kSpeakerTsl | kSpeakerTsr | 
 										   kSpeakerBfl| kSpeakerBfc | kSpeakerBfr;
@@ -305,10 +319,15 @@ const CString kString80Cube		= "8.0 Cube";
 const CString kString81Cine		= "8.1 Cine";
 const CString kString81Music	= "8.1 Music";
 const CString kString102		= "10.2 Experimental";
-const CString kString122 = "12.2";
-const CString kString50_4 = "5.0.4";
-const CString kString51_4 = "5.1.4";
-const CString kString91Atmos	= "9.1 Dolby Atmos";
+const CString kString122		= "12.2";
+const CString kString50_4		= "5.0.4";
+const CString kString51_4		= "5.1.4";
+const CString kString70_2		= "7.0.2"; 
+const CString kString71_2		= "7.1.2";
+const CString kString70_4		= "7.0.4";
+const CString kString71_4		= "7.1.4";
+const CString kString70_6		= "7.0.6"; 
+const CString kString71_6		= "7.1.6";
 const CString kString100		= "10.0 Auro-3D";
 const CString kString101		= "10.1 Auro-3D";
 const CString kString110		= "11.0 Auro-3D";
@@ -316,8 +335,6 @@ const CString kString111		= "11.1 Auro-3D";
 const CString kString130		= "13.0 Auro-3D";
 const CString kString131		= "13.1 Auro-3D";
 const CString kString81MPEG		= "8.1 MPEG";
-const CString kString70_4		= "7.0.4";
-const CString kString71_4		= "7.1.4";
 const CString kString140		= "14.0";
 const CString kString222		= "22.2";
 const CString kStringAmbi1stOrder = "1st Order Ambisonics";
@@ -371,13 +388,16 @@ const CString kString71CineFullRearS	= "L R C LFE Ls Rs Lcs Rcs";
 const CString kString71ProximityS		= "L R C LFE Ls Rs Pl Pr";
 const CString kString50_4S		= "L R C Ls Rs Tfl Tfr Trl Trr";
 const CString kString51_4S		= "L R C LFE Ls Rs Tfl Tfr Trl Trr"; 
-const CString kString91AtmosS	= "L R C LFE Ls Rs Sl Sr Tsl Tsr";
+const CString kString70_2S		= "L R C Ls Rs Sl Sr Tsl Tsr"; 
+const CString kString71_2S		= "L R C LFE Ls Rs Sl Sr Tsl Tsr";
+const CString kString70_4S		= "L R C Ls Rs Sl Sr Tfl Tfr Trl Trr";
+const CString kString71_4S		= "L R C LFE Ls Rs Sl Sr Tfl Tfr Trl Trr";
+const CString kString70_6S		= "L R C Ls Rs Sl Sr Tfl Tfr Trl Trr Tsl Tsr";
+const CString kString71_6S		= "L R C LFE Ls Rs Sl Sr Tfl Tfr Trl Trr Tsl Tsr";
 const CString kString100S		= "L R C Ls Rs Tc Tfl Tfr Trl Trr";
 const CString kString101S		= "L R C LFE Ls Rs Tc Tfl Tfr Trl Trr";
 const CString kString110S		= "L R C Ls Rs Tc Tfl Tfc Tfr Trl Trr";
 const CString kString111S		= "L R C LFE Ls Rs Tc Tfl Tfc Tfr Trl Trr";
-const CString kStringk70_4S		= "L R C Ls Rs Sl Sr Tfl Tfr Trl Trr";
-const CString kStringk71_4S		= "L R C LFE Ls Rs Sl Sr Tfl Tfr Trl Trr";
 const CString kString130S		= "L R C Ls Rs Sl Sr Tc Tfl Tfc Tfr Trl Trr";
 const CString kString131S		= "L R C LFE Ls Rs Sl Sr Tc Tfl Tfc Tfr Trl Trr";
 const CString kString102S		= "L R C LFE Ls Rs Tfl Tfc Tfr Trl Trr LFE2";
@@ -574,8 +594,18 @@ inline SpeakerArrangement getSpeakerArrangementFromString (CString arrStr)
 		return k51_4;
 	if (!strcmp8 (arrStr, kString81MPEG))
 		return k81MPEG3D;
-	if (!strcmp8 (arrStr, kString91Atmos))
-		return k91Atmos;
+	if (!strcmp8 (arrStr, kString70_2))
+		return k70_2; 
+	if (!strcmp8 (arrStr, kString71_2))
+		return k71_2;
+	if (!strcmp8 (arrStr, kString70_4))
+		return k70_4;
+	if (!strcmp8 (arrStr, kString71_4))
+		return k71_4;
+	if (!strcmp8 (arrStr, kString70_6))
+		return k70_6;
+	if (!strcmp8 (arrStr, kString71_6))
+		return k71_6;
 	if (!strcmp8 (arrStr, kString100))
 		return k100;
 	if (!strcmp8 (arrStr, kString101))
@@ -584,10 +614,6 @@ inline SpeakerArrangement getSpeakerArrangementFromString (CString arrStr)
 		return k110;
 	if (!strcmp8 (arrStr, kString111))
 		return k111;
-	if (!strcmp8 (arrStr, kString70_4))
-		return k70_4;
-	if (!strcmp8 (arrStr, kString71_4))
-		return k71_4;
 	if (!strcmp8 (arrStr, kString130))
 		return k130;
 	if (!strcmp8 (arrStr, kString131))
@@ -655,7 +681,6 @@ inline CString getSpeakerArrangementString (SpeakerArrangement arr, bool withSpe
 		case k71CineFrontHigh:	return withSpeakersName ? kString71CineFrontHighS	: kString71CineFrontHigh;
 		case k71CineSideHigh:	return withSpeakersName ? kString71CineSideHighS	: kString71CineSideHigh;
 		case k71CineFullRear:	return withSpeakersName ? kString71CineFullRearS	: kString71CineFullRear;
-		case k91Atmos:			return withSpeakersName ? kString91AtmosS	: kString91Atmos;
 		case k100:				return withSpeakersName ? kString100S		: kString100;
 		case k101:				return withSpeakersName ? kString101S		: kString101;
 		case k110:				return withSpeakersName ? kString110S		: kString110;
@@ -663,9 +688,13 @@ inline CString getSpeakerArrangementString (SpeakerArrangement arr, bool withSpe
 
 		case k50_4:				return withSpeakersName ? kString50_4S		: kString50_4;
 		case k51_4:				return withSpeakersName ? kString51_4S		: kString51_4;
-		case k70_4:				return withSpeakersName ? kStringk70_4S		: kString70_4;
-		case k71_4:				return withSpeakersName ? kStringk71_4S		: kString71_4;
-			
+		case k70_2:				return withSpeakersName ? kString70_2S		: kString70_2;
+		case k71_2:				return withSpeakersName ? kString71_2S		: kString71_2;
+		case k70_4:				return withSpeakersName ? kString70_4S		: kString70_4;
+		case k71_4:				return withSpeakersName ? kString71_4S		: kString71_4;
+		case k70_6:				return withSpeakersName ? kString70_6S		: kString70_6;
+		case k71_6:				return withSpeakersName ? kString71_6S		: kString71_6;
+
 		case k130:				return withSpeakersName ? kString130S		: kString130;
 		case k131:				return withSpeakersName ? kString131S		: kString131;
 		case k140:				return withSpeakersName ? kString140S		: kString140;

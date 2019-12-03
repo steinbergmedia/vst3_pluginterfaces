@@ -44,11 +44,13 @@ Bus Description
 
 A bus can be understood as a "collection of data channels" belonging together.
 It describes a data input or a data output of the Plug-in.
-A VST component can define any desired number of buses, but this number must \b never change.
+A VST component can define any desired number of buses.
 Dynamic usage of buses is handled in the host by activating and deactivating buses.
+All buses are initially inactive.
 The component has to define the maximum number of supported buses and it has to
-define which of them are active by default. A host that can handle multiple buses,
-allows the user to activate buses that were initially inactive.
+define which of them have to be activated by default after instantiation of the Plug-in (This is
+only a wish, the host is allow to not follow it, and only activate the first bus for example).
+A host that can handle multiple buses, allows the user to activate buses which are initially all inactive.
 
 See also: IComponent::getBusInfo, IComponent::activateBus
 
@@ -96,7 +98,8 @@ struct BusInfo
 	uint32 flags;			///< flags - a combination of \ref BusFlags
 	enum BusFlags
 	{
-		kDefaultActive = 1 << 0 ///< bus active per default
+		kDefaultActive = 1 << 0 ///< The Plug-in wants that this bus should be activated
+		                        ///(activateBus call is requested), by default a bus is inactive
 	};
 };
 
@@ -158,9 +161,11 @@ public:
 	    The inInfo always refers to an input bus while the returned outInfo must refer to an output bus! */
 	virtual tresult PLUGIN_API getRoutingInfo (RoutingInfo& inInfo, RoutingInfo& outInfo /*out*/) = 0;
 
-	/** Called upon (de-)activating a bus in the host application. The Plug-in should only processed an activated bus,
-	    the host could provide less see \ref AudioBusBuffers in the process call (see \ref IAudioProcessor::process) if last buses are not activated */
-	virtual tresult PLUGIN_API activateBus (MediaType type, BusDirection dir, int32 index, TBool state) = 0;
+	/** Called upon (de-)activating a bus in the host application. The Plug-in should only processed
+	   an activated bus, the host could provide less see \ref AudioBusBuffers in the process call
+	   (see \ref IAudioProcessor::process) if last buses are not activated */
+	virtual tresult PLUGIN_API activateBus (MediaType type, BusDirection dir, int32 index,
+	                                        TBool state) = 0;
 
 	/** Activates / deactivates the component. */
 	virtual tresult PLUGIN_API setActive (TBool state) = 0;
