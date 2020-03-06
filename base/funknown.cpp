@@ -84,7 +84,7 @@ namespace FUnknownPrivate {
 int32 PLUGIN_API atomicAdd (int32& var, int32 d)
 {
 #if SMTG_OS_WINDOWS
-	return InterlockedExchangeAdd (&var, d) + d;
+	return InterlockedExchangeAdd ((LONG*)&var, d) + d;
 #elif SMTG_OS_MACOS
 #if SMTG_MACOS_USE_STDATOMIC
 	return atomic_fetch_add (reinterpret_cast<atomic_int_least32_t*> (&var), d) + d;
