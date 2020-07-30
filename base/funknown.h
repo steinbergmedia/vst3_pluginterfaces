@@ -19,12 +19,11 @@
 #include "pluginterfaces/base/fplatform.h"
 #include "pluginterfaces/base/ftypes.h"
 #include "pluginterfaces/base/smartpointer.h"
-#include <string.h>
+#include <cstring>
 
 //------------------------------------------------------------------------
 /*! \defgroup pluginBase Basic Interfaces
 */
-//------------------------------------------------------------------------
 
 //------------------------------------------------------------------------
 //  Unique Identifier macros
@@ -117,7 +116,12 @@ public:																			        \
 
 //------------------------------------------------------------------------
 #define FUNKNOWN_CTOR	{ __funknownRefCount = 1; }
+#if SMTG_FUNKNOWN_DTOR_ASSERT
+#include <cassert>
+#define FUNKNOWN_DTOR { assert (__funknownRefCount == 0); }
+#else
 #define FUNKNOWN_DTOR
+#endif
 
 //------------------------------------------------------------------------
 #define QUERY_INTERFACE(iid, obj, InterfaceIID, InterfaceName)  \
@@ -221,7 +225,6 @@ int32 PLUGIN_API atomicAdd (int32& value, int32 amount);
 Each interface declares its identifier as static member inside the interface
 namespace (e.g. FUnknown::iid).
 */
-//------------------------------------------------------------------------
 class FUID
 {
 public:
@@ -265,7 +268,7 @@ public:
 		of each data byte (e.g. "9127BE30160E4BB69966670AA6087880"). 
 		
 		Typical use-case is:
-		\code
+		\code{.cpp}
 		char8[33] strUID = {0};
 		FUID uid;
 		if (uid.generate ())
@@ -279,11 +282,11 @@ public:
 	    the ASCII-encoded hexadecimal value of the corresponding data byte. */
 	bool fromString (const char8* string);
 
-	/** Converts UID to a string in Microsoft® OLE format.
+	/** Converts UID to a string in Microsoft(R) OLE format.
 	(e.g. "{c200e360-38c5-11ce-ae62-08002b2b79ef}") */
 	void toRegistryString (char8* string) const;
 
-	/** Sets the UID data from a string in Microsoft® OLE format. */
+	/** Sets the UID data from a string in Microsoft(R) OLE format. */
 	bool fromRegistryString (const char8* string);
 
 	enum UIDPrintStyle
@@ -348,8 +351,8 @@ inline bool operator== (const FUID& f1, T f2)
 Interfaces are identified by 16 byte Globally Unique Identifiers.
 The SDK provides a class called FUID for this purpose.
 
-\ref howtoClass */
-//------------------------------------------------------------------------
+\ref howtoClass
+*/
 class FUnknown
 {
 public:
@@ -362,12 +365,12 @@ public:
 	\param obj : (out) On return, *obj points to the requested interface */
 	virtual tresult PLUGIN_API queryInterface (const TUID _iid, void** obj) = 0;
 
-	/** Adds a reference and return the new reference count.
+	/** Adds a reference and returns the new reference count.
 	\par Remarks:
 	    The initial reference count after creating an object is 1. */
 	virtual uint32 PLUGIN_API addRef () = 0;
 
-	/** Releases a reference and return the new reference count.
+	/** Releases a reference and returns the new reference count.
 	If the reference count reaches zero, the object will be destroyed in memory. */
 	virtual uint32 PLUGIN_API release () = 0;
 
@@ -384,14 +387,13 @@ DECLARE_CLASS_IID (FUnknown, 0x00000000, 0x00000000, 0xC0000000, 0x00000046)
 //------------------------------------------------------------------------
 /** FUnknownPtr - automatic interface conversion and smart pointer in one.
     This template class can be used for interface conversion like this:
- \code
-    IPtr<IPath> path = owned (FHostCreate (IPath, hostClasses));
-    FUnknownPtr<IPath2> path2 (path); // does a query interface for IPath2
-    if (path2)
-        ...
+ \code{.cpp}
+IPtr<IPath> path = owned (FHostCreate (IPath, hostClasses));
+FUnknownPtr<IPath2> path2 (path); // does a query interface for IPath2
+if (path2)
+    ...
  \endcode
 */
-//------------------------------------------------------------------------
 template <class I>
 class FUnknownPtr : public IPtr<I>
 {
@@ -449,26 +451,25 @@ This class is obsolete and is only kept for compatibility.
 The replacement for FReleaser is OPtr.
 
 Usage example with FReleaser:
- \code
-    void someFunction ()
-    {
-        IPath* path = pathCreateMethod ();
-        FReleaser releaser (path);
-        .... do something with path...
-        .... path not used anymore, releaser will destroy it when leaving function scope
-    }
- \endcode
+\code{.cpp}
+void someFunction ()
+{
+    IPath* path = pathCreateMethod ();
+    FReleaser releaser (path);
+    .... do something with path...
+    .... path not used anymore, releaser will destroy it when leaving function scope
+}
+\endcode
 Usage example with OPtr:
- \code
-    void someFunction ()
-    {
-        OPtr<IPath> path = pathCreateMethod ();
-        .... do something with path...
-        .... path not used anymore, OPtr will destroy it when leaving function scope
-    }
- \endcode
+\code{.cpp}
+void someFunction ()
+{
+    OPtr<IPath> path = pathCreateMethod ();
+    .... do something with path...
+    .... path not used anymore, OPtr will destroy it when leaving function scope
+}
+\endcode
 */
-//------------------------------------------------------------------------
 struct FReleaser
 {
 	FReleaser (FUnknown* u) : u (u) {}

@@ -24,17 +24,18 @@ namespace Vst {
 //------------------------------------------------------------------------
 /** VST3 SDK Version */
 #ifndef kVstVersionString
-#define kVstVersionString	"VST 3.6.14"	///< SDK version for PClassInfo2
+#define kVstVersionString	"VST 3.7.0"	///< SDK version for PClassInfo2
 #endif
 
 #define kVstVersionMajor	3
-#define kVstVersionMinor	6
-#define kVstVersionSub		14
+#define kVstVersionMinor	7
+#define kVstVersionSub		0
 
 #define VST_VERSION ((kVstVersionMajor << 16) | (kVstVersionMinor << 8) | kVstVersionSub)
 
 // Versions History which allows to write such code:
 // #if VST_VERSION >= VST_3_6_5_VERSION
+#define VST_3_7_0_VERSION	0x030700
 #define VST_3_6_14_VERSION	0x03060E
 #define VST_3_6_13_VERSION	0x03060D
 #define VST_3_6_12_VERSION	0x03060C
@@ -51,8 +52,7 @@ namespace Vst {
 #define VST_3_0_0_VERSION	0x030000
 
 //------------------------------------------------------------------------
-/** \defgroup vst3typedef VST 3 Data Types
-*/
+/** \defgroup vst3typedef VST 3 Data Types */
 /*@{*/
 //------------------------------------------------------------------------
 // String Types

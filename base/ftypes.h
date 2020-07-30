@@ -137,8 +137,8 @@ namespace Steinberg
 
 
 //----------------------------------------------------------------------------
-/** Byte-order Conversion Macros */
-//----------------------------------------------------------------------------
+/** Byte-order Conversion Macros 
+*/
 #define SWAP_32(l) { \
 	unsigned char* p = (unsigned char*)& (l); \
 	unsigned char t; \

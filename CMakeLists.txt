@@ -57,15 +57,17 @@ if (VST_SDK)
         vst/ivstmidilearn.h
         vst/ivstnoteexpression.h
         vst/ivstparameterchanges.h
+        vst/ivstparameterfunctionname.h
         vst/ivstphysicalui.h
+        vst/ivstpluginterfacesupport.h
         vst/ivstplugview.h
         vst/ivstprefetchablesupport.h
         vst/ivstprocesscontext.h
-        vst/ivstpluginterfacesupport.h
         vst/ivstrepresentation.h
         vst/ivstunits.h
         vst/vstpresetkeys.h
         vst/vstpshpack4.h
+        vst/vstspeaker.h
         vst/vsttypes.h
 )
 endif()

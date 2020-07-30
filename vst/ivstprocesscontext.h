@@ -17,7 +17,7 @@
 #pragma once
 
 #include "pluginterfaces/base/funknown.h"
-#include "vsttypes.h"
+#include "pluginterfaces/vst/vsttypes.h"
 
 //------------------------------------------------------------------------
 #include "pluginterfaces/base/falignpush.h"
@@ -41,7 +41,6 @@ Some examples:
 	- 59.94 fps	     is framesPerSecond: 60 and flags: kPullDownRate
 	- 60 fps         is framesPerSecond: 60 and flags: 0
 */
-//------------------------------------------------------------------------
 struct FrameRate
 {
 //------------------------------------------------------------------------
@@ -50,7 +49,7 @@ struct FrameRate
 		kPullDownRate = 1 << 0,
 		kDropRate     = 1 << 1
 	};
-//------------------------------------------------------------------------
+
 	uint32 framesPerSecond;		///< frame rate
 	uint32 flags;				///< flags #FrameRateFlags
 //------------------------------------------------------------------------
@@ -60,21 +59,21 @@ struct FrameRate
 /** Description of a chord.
 A chord is described with a key note, a root note and the
 \copydoc chordMask
-\see ProcessContext*/
-//------------------------------------------------------------------------
+\see ProcessContext
+*/
 struct Chord
 {
 //------------------------------------------------------------------------
 	uint8 keyNote;		///< key note in chord
 	uint8 rootNote;		///< lowest note in chord
 
-	/** Bitmask of a chord.
+	/** Bitmask of a chord. \n
 	    1st bit set: minor second; 2nd bit set: major second, and so on. \n
 		There is \b no bit for the keynote (root of the chord) because it is inherently always present. \n
 		Examples:
-		- XXXX 0000 0100 1000 (= 0x0048) -> major chord\n
-		- XXXX 0000 0100 0100 (= 0x0044) -> minor chord\n
-		- XXXX 0010 0100 0100 (= 0x0244) -> minor chord with minor seventh  */
+		- XXXX 0000 0100 1000 (= 0x0048) -> major chord
+		- XXXX 0000 0100 0100 (= 0x0044) -> minor chord
+		- XXXX 0010 0100 0100 (= 0x0244) -> minor chord with minor seventh */
 	int16 chordMask;
 
 	enum Masks {
@@ -86,15 +85,14 @@ struct Chord
 
 //------------------------------------------------------------------------
 /** Audio processing context.
-For each processing block the host provides timing information and
-musical parameters that can change over time. For a host that supports jumps
-(like cycle) it is possible to split up a processing block into multiple parts in
-order to provide a correct project time inside of every block, but this behaviour
-is not mandatory. Since the timing will be correct at the beginning of the next block
-again, a host that is dependent on a fixed processing block size can choose to neglect
+For each processing block the host provides timing information and musical parameters that can
+change over time. For a host that supports jumps (like cycle) it is possible to split up a
+processing block into multiple parts in order to provide a correct project time inside of every
+block, but this behavior is not mandatory. Since the timing will be correct at the beginning of the
+next block again, a host that is dependent on a fixed processing block size can choose to neglect
 this problem.
-\see IAudioProcessor, ProcessData*/
-//------------------------------------------------------------------------
+\see IAudioProcessor, ProcessData
+*/
 struct ProcessContext
 {
 //------------------------------------------------------------------------
@@ -122,27 +120,27 @@ struct ProcessContext
 
 	uint32 state;					///< a combination of the values from \ref StatesAndFlags
 
-	double sampleRate;				///< current sample rate (always valid)
-	TSamples projectTimeSamples;	///< project time in samples (always valid)
+	double sampleRate;				///< current sample rate					(always valid)
+	TSamples projectTimeSamples;	///< project time in samples				(always valid)
 
-	int64 systemTime;				///< system time in nanoseconds (optional)
-	TSamples continousTimeSamples;	///< project time, without loop (optional)
+	int64 systemTime;				///< system time in nanoseconds					(optional)
+	TSamples continousTimeSamples;	///< project time, without loop					(optional)
 
-	TQuarterNotes projectTimeMusic;	///< musical position in quarter notes (1.0 equals 1 quarter note)
-	TQuarterNotes barPositionMusic;	///< last bar start position, in quarter notes
-	TQuarterNotes cycleStartMusic;	///< cycle start in quarter notes
-	TQuarterNotes cycleEndMusic;	///< cycle end in quarter notes
+	TQuarterNotes projectTimeMusic;	///< musical position in quarter notes (1.0 equals 1 quarter note) (optional)
+	TQuarterNotes barPositionMusic;	///< last bar start position, in quarter notes	(optional)
+	TQuarterNotes cycleStartMusic;	///< cycle start in quarter notes				(optional)
+	TQuarterNotes cycleEndMusic;	///< cycle end in quarter notes					(optional)
 
-	double tempo;					///< tempo in BPM (Beats Per Minute)
-	int32 timeSigNumerator;			///< time signature numerator (e.g. 3 for 3/4)
-	int32 timeSigDenominator;		///< time signature denominator (e.g. 4 for 3/4)
+	double tempo;					///< tempo in BPM (Beats Per Minute)			(optional)
+	int32 timeSigNumerator;			///< time signature numerator (e.g. 3 for 3/4)	(optional)
+	int32 timeSigDenominator;		///< time signature denominator (e.g. 4 for 3/4) (optional)
 
-	Chord chord;					///< musical info
+	Chord chord;					///< musical info								(optional)
 
-	int32 smpteOffsetSubframes;		///< SMPTE (sync) offset in subframes (1/80 of frame)
-	FrameRate frameRate;			///< frame rate
+	int32 smpteOffsetSubframes;		///< SMPTE (sync) offset in subframes (1/80 of frame) (optional)
+	FrameRate frameRate;			///< frame rate									(optional)
 
-	int32 samplesToNextClock;		///< MIDI Clock Resolution (24 Per Quarter Note), can be negative (nearest)
+	int32 samplesToNextClock;		///< MIDI Clock Resolution (24 Per Quarter Note), can be negative (nearest) (optional)
 //------------------------------------------------------------------------
 };
 

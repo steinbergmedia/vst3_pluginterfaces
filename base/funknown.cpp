@@ -18,7 +18,7 @@
 
 #include "fstrdefs.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 #if SMTG_OS_WINDOWS
 #include <objbase.h>
@@ -84,7 +84,7 @@ namespace FUnknownPrivate {
 int32 PLUGIN_API atomicAdd (int32& var, int32 d)
 {
 #if SMTG_OS_WINDOWS
-	return InterlockedExchangeAdd (&var, d) + d;
+	return InterlockedExchangeAdd ((LONG*)&var, d) + d;
 #elif SMTG_OS_MACOS
 #if SMTG_MACOS_USE_STDATOMIC
 	return atomic_fetch_add (reinterpret_cast<atomic_int_least32_t*> (&var), d) + d;
@@ -291,7 +291,7 @@ void FUID::toString (char8* string) const
 		return;
 
 #if COM_COMPATIBLE
-	GuidStruct* g = (GuidStruct*)data;
+	auto* g = (GuidStruct*)data;
 
 	char8 s[17];
 	Steinberg::toString8 (s, data, 8, 16);
@@ -377,7 +377,7 @@ void FUID::toRegistryString (char8* string) const
 // e.g. {c200e360-38c5-11ce-ae62-08002b2b79ef}
 
 #if COM_COMPATIBLE
-	GuidStruct* g = (GuidStruct*)data;
+	auto* g = (GuidStruct*)data;
 
 	char8 s1[5];
 	Steinberg::toString8 (s1, data, 8, 10);

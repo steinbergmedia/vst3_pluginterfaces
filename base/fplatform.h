@@ -49,6 +49,11 @@
 	#define SMTG_OS_IOS		0
 	#define SMTG_OS_OSX		0
 
+	#define SMTG_CPU_X86	_M_IX86
+	#define SMTG_CPU_X86_64	_M_AMD64
+	#define SMTG_CPU_ARM	(_M_ARM && !_M_ARM64)
+	#define SMTG_CPU_ARM_64	_M_ARM64
+
 	#define BYTEORDER kLittleEndian
 	
 	#define COM_COMPATIBLE	1
@@ -93,6 +98,11 @@
 	#define SMTG_OS_IOS		0
 	#define SMTG_OS_OSX		0
 
+	#define SMTG_CPU_X86	__i386__
+	#define SMTG_CPU_X86_64	__x86_64__
+	#define SMTG_CPU_ARM	__arm__
+	#define SMTG_CPU_ARM_64	__aarch64__
+
 	#include <endian.h>
 	#if __BYTE_ORDER == __LITTLE_ENDIAN
 		#define BYTEORDER kLittleEndian
@@ -132,6 +142,11 @@
 	#define SMTG_OS_WINDOWS	0
 	#define SMTG_OS_IOS		TARGET_OS_IPHONE
 	#define SMTG_OS_OSX		TARGET_OS_MAC && !TARGET_OS_IPHONE
+
+	#define SMTG_CPU_X86	TARGET_CPU_X86
+	#define SMTG_CPU_X86_64	TARGET_CPU_X86_64
+	#define SMTG_CPU_ARM	TARGET_CPU_ARM
+	#define SMTG_CPU_ARM_64	TARGET_CPU_ARM64
 
 	#if !SMTG_OS_IOS
 		#ifndef __CF_USE_FRAMEWORK_INCLUDES__

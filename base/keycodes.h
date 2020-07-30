@@ -23,7 +23,6 @@ namespace Steinberg {
 /** Virtual Key Codes.
 OS-independent enumeration of virtual keycodes.
 */
-//------------------------------------------------------------------------------
 enum VirtualKeyCodes
 {
 	KEY_BACK = 1,

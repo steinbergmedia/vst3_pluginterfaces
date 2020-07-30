@@ -26,9 +26,12 @@
 //------------------------------------------------------------------------
 namespace Steinberg {
 namespace Vst {
+
 //------------------------------------------------------------------------
 /** Note-on event specific data. Used in \ref Event (union)
-    Pitch uses the twelve-tone equal temperament tuning (12-TET). */
+\ingroup vstEventGrp
+Pitch uses the twelve-tone equal temperament tuning (12-TET).
+ */
 struct NoteOnEvent
 {
 	int16 channel;		///< channel index in event bus
@@ -40,7 +43,9 @@ struct NoteOnEvent
 };
 
 //------------------------------------------------------------------------
-/** Note-off event specific data. Used in \ref Event (union)*/
+/** Note-off event specific data. Used in \ref Event (union)
+\ingroup vstEventGrp 
+*/
 struct NoteOffEvent
 {
 	int16 channel;		///< channel index in event bus
@@ -51,7 +56,9 @@ struct NoteOffEvent
 };
 
 //------------------------------------------------------------------------
-/** Data event specific data. Used in \ref Event (union)*/
+/** Data event specific data. Used in \ref Event (union)
+\ingroup vstEventGrp 
+*/
 struct DataEvent
 {
 	uint32 size;		///< size in bytes of the data block bytes
@@ -66,7 +73,9 @@ struct DataEvent
 };
 
 //------------------------------------------------------------------------
-/** PolyPressure event specific data. Used in \ref Event (union)*/
+/** PolyPressure event specific data. Used in \ref Event (union)
+\ingroup vstEventGrp
+*/
 struct PolyPressureEvent
 {
 	int16 channel;		///< channel index in event bus
@@ -76,7 +85,9 @@ struct PolyPressureEvent
 };
 
 //------------------------------------------------------------------------
-/** Chord event specific data. Used in \ref Event (union)*/
+/** Chord event specific data. Used in \ref Event (union)
+\ingroup vstEventGrp 
+*/
 struct ChordEvent
 {
 	int16 root;			///< range [0, 127] = [C-2, G8] with A3=440Hz
@@ -88,7 +99,9 @@ struct ChordEvent
 };
 
 //------------------------------------------------------------------------
-/** Scale event specific data. Used in \ref Event (union)*/
+/** Scale event specific data. Used in \ref Event (union)
+\ingroup vstEventGrp 
+*/
 struct ScaleEvent
 {
 	int16 root;			///< range [0, 127] = root Note/Transpose Factor
@@ -99,7 +112,12 @@ struct ScaleEvent
 };
 
 //------------------------------------------------------------------------
-/** Legacy MIDI CC Out event specific data. Used in \ref Event (union)*/
+/** Legacy MIDI CC Out event specific data. Used in \ref Event (union)
+\ingroup vstEventGrp
+- [released: 3.6.12]
+
+This kind of event is reserved for generating MIDI CC as output event for kEvent Bus during the process call.
+ */
 struct LegacyMIDICCOutEvent
 {
 	uint8 controlNumber;///< see enum ControllerNumbers [0, 255]
@@ -109,8 +127,10 @@ struct LegacyMIDICCOutEvent
 };
 
 //------------------------------------------------------------------------
-/** Event */
-//------------------------------------------------------------------------
+/** Event 
+\ingroup vstEventGrp
+Structure representing a single Event of different types associated to a specific event (\ref kEvent) bus.
+*/
 struct Event
 {
 	int32 busIndex;				///< event bus index
@@ -157,15 +177,15 @@ struct Event
 };
 
 //------------------------------------------------------------------------
-/** List of events to process.
+/** List of events to process: Vst::IEventList
 \ingroup vstIHost vst300
 - [host imp]
 - [released: 3.0.0]
 - [mandatory]
 
-\see ProcessData, Event */
-//------------------------------------------------------------------------
-class IEventList: public FUnknown
+\see ProcessData, Event
+*/
+class IEventList : public FUnknown
 {
 public:
 //------------------------------------------------------------------------
