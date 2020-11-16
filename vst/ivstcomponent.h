@@ -30,12 +30,14 @@ class IBStream;
 /** All VST specific interfaces are located in Vst namespace */
 namespace Vst {
 
-const int32 kDefaultFactoryFlags = PFactoryInfo::kUnicode; ///< Standard value for PFactoryInfo::flags
+/** Standard value for PFactoryInfo::flags */
+const int32 kDefaultFactoryFlags = PFactoryInfo::kUnicode; 
 
 #define BEGIN_FACTORY_DEF(vendor,url,email) using namespace Steinberg; \
-	EXPORT_FACTORY IPluginFactory* PLUGIN_API GetPluginFactory () { \
+	SMTG_EXPORT_SYMBOL IPluginFactory* PLUGIN_API GetPluginFactory () {	\
 	if (!gPluginFactory) \
-	{	static PFactoryInfo factoryInfo (vendor,url,email,Vst::kDefaultFactoryFlags); \
+	{ \
+		static PFactoryInfo factoryInfo (vendor, url, email, Vst::kDefaultFactoryFlags); \
 		gPluginFactory = new CPluginFactory (factoryInfo);
 
 //------------------------------------------------------------------------
@@ -51,6 +53,7 @@ The component has to define the maximum number of supported busses and it has to
 define which of them have to be activated by default after instantiation of the plug-in (This is
 only a wish, the host is allow to not follow it, and only activate the first bus for example).
 A host that can handle multiple busses, allows the user to activate busses which are initially all inactive.
+The kMain busses have to place before any others kAux busses.
 
 See also: IComponent::getBusInfo, IComponent::activateBus
 */

@@ -53,7 +53,7 @@ enum NoteExpressionTypeIDs : uint32
 	kVibratoTypeID,			///< Vibrato
 	kExpressionTypeID,		///< Expression
 	kBrightnessTypeID,		///< Brightness
-	kTextTypeID,			///< TODO:
+	kTextTypeID,			///< See NoteExpressionTextEvent
 	kPhonemeTypeID,			///< TODO:
 
 	kCustomStart = 100000,	///< start of custom note expression type ids

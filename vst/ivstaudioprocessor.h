@@ -262,18 +262,18 @@ public:
 	/** Try to set (host => plug-in) a wanted arrangement for inputs and outputs.
 	   The host should always deliver the same number of input and output busses than the plug-in
 	   needs (see \ref IComponent::getBusCount). The plug-in has 3 possibilities to react on this
-	   setBusArrangements call:
-	   1.The plug-in accepts these arrangements, then it should modify, if needed, its busses to match 
+	   setBusArrangements call:\n
+	   1. The plug-in accepts these arrangements, then it should modify, if needed, its busses to match 
 	     these new arrangements (later on asked by the host with IComponent::getBusInfo () or
-	     IAudioProcessor::getBusArrangement ()) and then should return kResultTrue.
-	   2.The plug-in does not accept or support these requested arrangements for all
+	     IAudioProcessor::getBusArrangement ()) and then should return kResultTrue.\n
+	   2. The plug-in does not accept or support these requested arrangements for all
 	     inputs/outputs or just for some or only one bus, but the plug-in can try to adapt its current
 	     arrangements according to the requested ones (requested arrangements for kMain busses should be
 		 handled with more priority than the ones for kAux busses), then it should modify its busses arrangements
-		 and should return kResultFalse.
-	   3.Same than the point 2 above the plug-in does not support these requested arrangements 
+		 and should return kResultFalse.\n
+	   3. Same than the point 2 above the plug-in does not support these requested arrangements 
 	     but the plug-in cannot find corresponding arrangements, the plug-in could keep its current arrangement
-		 or fall back to a default arrangement by modifying its busses arrangements and should return kResultFalse.
+		 or fall back to a default arrangement by modifying its busses arrangements and should return kResultFalse.\n
 		\param inputs pointer to an array of /ref SpeakerArrangement
 		\param numIns number of /ref SpeakerArrangement in inputs array
 		\param outputs pointer to an array of /ref SpeakerArrangement

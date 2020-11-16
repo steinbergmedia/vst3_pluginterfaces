@@ -55,18 +55,18 @@ public:
 	/** Gets float value. */
 	virtual tresult PLUGIN_API getFloat (AttrID id, double& value) = 0;
 
-	/** Sets string value (UTF16). */
+	/** Sets string value (UTF16) (should be null-terminated!). */
 	virtual tresult PLUGIN_API setString (AttrID id, const TChar* string) = 0;
 
 	/** Gets string value (UTF16). Note that Size is in Byte, not the string Length!
 		Do not forget to multiply the length by sizeof (TChar)! */
-	virtual tresult PLUGIN_API getString (AttrID id, TChar* string, uint32 size) = 0;
+	virtual tresult PLUGIN_API getString (AttrID id, TChar* string, uint32 sizeInBytes) = 0;
 
 	/** Sets binary data. */
-	virtual tresult PLUGIN_API setBinary (AttrID id, const void* data, uint32 size) = 0;
+	virtual tresult PLUGIN_API setBinary (AttrID id, const void* data, uint32 sizeInBytes) = 0;
 
 	/** Gets binary data. */
-	virtual tresult PLUGIN_API getBinary (AttrID id, const void*& data, uint32& size) = 0;
+	virtual tresult PLUGIN_API getBinary (AttrID id, const void*& data, uint32& sizeInBytes) = 0;
 //------------------------------------------------------------------------
 	static const FUID iid;
 };

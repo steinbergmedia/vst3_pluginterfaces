@@ -84,7 +84,11 @@ namespace FUnknownPrivate {
 int32 PLUGIN_API atomicAdd (int32& var, int32 d)
 {
 #if SMTG_OS_WINDOWS
+#ifdef __MINGW32__
+	return InterlockedExchangeAdd (reinterpret_cast<long volatile*>(&var), d) + d;
+#else
 	return InterlockedExchangeAdd ((LONG*)&var, d) + d;
+#endif
 #elif SMTG_OS_MACOS
 #if SMTG_MACOS_USE_STDATOMIC
 	return atomic_fetch_add (reinterpret_cast<atomic_int_least32_t*> (&var), d) + d;
@@ -153,7 +157,7 @@ bool FUID::generate ()
 	{
 		case RPC_S_OK: memcpy (data, (char*)&guid, sizeof (TUID)); return true;
 
-		case RPC_S_UUID_LOCAL_ONLY:
+		case (HRESULT)RPC_S_UUID_LOCAL_ONLY:
 		default: return false;
 	}
 #endif

@@ -34,10 +34,17 @@ namespace FunctionNameType {
 	const CString kCompGainReductionPeakHold	= "Comp:GainReductionPeakHold";
 	const CString kCompResetGainReductionMax	= "Comp:ResetGainReductionMax";
 
-	const CString kLowLatencyMode				= "LowLatencyMode"; /** Useful for live situation where low latency is required */
-	const CString kRandomize					= "Randomize";	/** TODO */
-	const CString kWetDryMix					= "WetDryMix";	/** TODO */
-	
+    const CString kLowLatencyMode = "LowLatencyMode"; /** Useful for live situation where low
+														 latency is required:
+														 0 means LowLatency disable,
+														 1 means LowLatency enable */
+    const CString kDryWetMix = "DryWetMix"; /** Allowing to mix the original (Dry) Signal with the processed one (Wet):
+											0.0 means Dry Signal only,
+											0.5 means 50% Dry Signal + 50% Wet Signal,
+											1.0 means Wet Signal only */
+    const CString kRandomize = "Randomize"; /**	Allow to assign some randomized values to some
+                                               parameters in a controlled way*/
+
 } // FunctionNameType
 
 //------------------------------------------------------------------------

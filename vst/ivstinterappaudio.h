@@ -122,13 +122,13 @@ DECLARE_CLASS_IID (IInterAppAudioConnectionNotification, 0x6020C72D, 0x5FC24AA1,
 class IInterAppAudioPresetManager : public FUnknown
 {
 public:
-	/** TODO */
+	/** Open the Preset Browser in order to load a preset */
 	virtual tresult PLUGIN_API runLoadPresetBrowser () = 0;
-	/** TODO */
+	/** Open the Preset Browser in order to save a preset */
 	virtual tresult PLUGIN_API runSavePresetBrowser () = 0;
-	/** TODO */
+	/** Load the next available preset */
 	virtual tresult PLUGIN_API loadNextPreset () = 0;
-	/** TODO */
+	/** Load the previous available preset */
 	virtual tresult PLUGIN_API loadPreviousPreset () = 0;
 
 	//------------------------------------------------------------------------	

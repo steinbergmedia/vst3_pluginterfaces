@@ -32,26 +32,26 @@
 #if COM_COMPATIBLE
 #define INLINE_UID(l1, l2, l3, l4) \
 { \
-	(::Steinberg::int8)((l1 & 0x000000FF)      ), (::Steinberg::int8)((l1 & 0x0000FF00) >>  8), \
-	(::Steinberg::int8)((l1 & 0x00FF0000) >> 16), (::Steinberg::int8)((l1 & 0xFF000000) >> 24), \
-	(::Steinberg::int8)((l2 & 0x00FF0000) >> 16), (::Steinberg::int8)((l2 & 0xFF000000) >> 24), \
-	(::Steinberg::int8)((l2 & 0x000000FF)      ), (::Steinberg::int8)((l2 & 0x0000FF00) >>  8), \
-	(::Steinberg::int8)((l3 & 0xFF000000) >> 24), (::Steinberg::int8)((l3 & 0x00FF0000) >> 16), \
-	(::Steinberg::int8)((l3 & 0x0000FF00) >>  8), (::Steinberg::int8)((l3 & 0x000000FF)      ), \
-	(::Steinberg::int8)((l4 & 0xFF000000) >> 24), (::Steinberg::int8)((l4 & 0x00FF0000) >> 16), \
-	(::Steinberg::int8)((l4 & 0x0000FF00) >>  8), (::Steinberg::int8)((l4 & 0x000000FF)      )  \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l1) & 0x000000FF)      ), (::Steinberg::int8)(((::Steinberg::uint32)(l1) & 0x0000FF00) >>  8), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l1) & 0x00FF0000) >> 16), (::Steinberg::int8)(((::Steinberg::uint32)(l1) & 0xFF000000) >> 24), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l2) & 0x00FF0000) >> 16), (::Steinberg::int8)(((::Steinberg::uint32)(l2) & 0xFF000000) >> 24), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l2) & 0x000000FF)      ), (::Steinberg::int8)(((::Steinberg::uint32)(l2) & 0x0000FF00) >>  8), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l3) & 0xFF000000) >> 24), (::Steinberg::int8)(((::Steinberg::uint32)(l3) & 0x00FF0000) >> 16), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l3) & 0x0000FF00) >>  8), (::Steinberg::int8)(((::Steinberg::uint32)(l3) & 0x000000FF)      ), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l4) & 0xFF000000) >> 24), (::Steinberg::int8)(((::Steinberg::uint32)(l4) & 0x00FF0000) >> 16), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l4) & 0x0000FF00) >>  8), (::Steinberg::int8)(((::Steinberg::uint32)(l4) & 0x000000FF)      )  \
 }
 #else
 #define INLINE_UID(l1, l2, l3, l4) \
 { \
-	(::Steinberg::int8)((l1 & 0xFF000000) >> 24), (::Steinberg::int8)((l1 & 0x00FF0000) >> 16), \
-	(::Steinberg::int8)((l1 & 0x0000FF00) >>  8), (::Steinberg::int8)((l1 & 0x000000FF)      ), \
-	(::Steinberg::int8)((l2 & 0xFF000000) >> 24), (::Steinberg::int8)((l2 & 0x00FF0000) >> 16), \
-	(::Steinberg::int8)((l2 & 0x0000FF00) >>  8), (::Steinberg::int8)((l2 & 0x000000FF)      ), \
-	(::Steinberg::int8)((l3 & 0xFF000000) >> 24), (::Steinberg::int8)((l3 & 0x00FF0000) >> 16), \
-	(::Steinberg::int8)((l3 & 0x0000FF00) >>  8), (::Steinberg::int8)((l3 & 0x000000FF)      ), \
-	(::Steinberg::int8)((l4 & 0xFF000000) >> 24), (::Steinberg::int8)((l4 & 0x00FF0000) >> 16), \
-	(::Steinberg::int8)((l4 & 0x0000FF00) >>  8), (::Steinberg::int8)((l4 & 0x000000FF)      )  \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l1) & 0xFF000000) >> 24), (::Steinberg::int8)(((::Steinberg::uint32)(l1) & 0x00FF0000) >> 16), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l1) & 0x0000FF00) >>  8), (::Steinberg::int8)(((::Steinberg::uint32)(l1) & 0x000000FF)      ), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l2) & 0xFF000000) >> 24), (::Steinberg::int8)(((::Steinberg::uint32)(l2) & 0x00FF0000) >> 16), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l2) & 0x0000FF00) >>  8), (::Steinberg::int8)(((::Steinberg::uint32)(l2) & 0x000000FF)      ), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l3) & 0xFF000000) >> 24), (::Steinberg::int8)(((::Steinberg::uint32)(l3) & 0x00FF0000) >> 16), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l3) & 0x0000FF00) >>  8), (::Steinberg::int8)(((::Steinberg::uint32)(l3) & 0x000000FF)      ), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l4) & 0xFF000000) >> 24), (::Steinberg::int8)(((::Steinberg::uint32)(l4) & 0x00FF0000) >> 16), \
+	(::Steinberg::int8)(((::Steinberg::uint32)(l4) & 0x0000FF00) >>  8), (::Steinberg::int8)(((::Steinberg::uint32)(l4) & 0x000000FF)      )  \
 }
 #endif
 

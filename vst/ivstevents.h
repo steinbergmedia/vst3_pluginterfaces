@@ -28,6 +28,14 @@ namespace Steinberg {
 namespace Vst {
 
 //------------------------------------------------------------------------
+/** Reserved note identifier (noteId) range for a plug-in. Guaranteed not used by the host. */
+enum NoteIDUserRange
+{
+	kNoteIDUserRangeLowerBound = -10000, 
+	kNoteIDUserRangeUpperBound = -1000,
+};
+
+//------------------------------------------------------------------------
 /** Note-on event specific data. Used in \ref Event (union)
 \ingroup vstEventGrp
 Pitch uses the twelve-tone equal temperament tuning (12-TET).
@@ -35,7 +43,7 @@ Pitch uses the twelve-tone equal temperament tuning (12-TET).
 struct NoteOnEvent
 {
 	int16 channel;		///< channel index in event bus
-	int16 pitch;		///< range [0, 127] = [C-2, G8] with A3=440Hz (12-TET)
+	int16 pitch;		///< range [0, 127] = [C-2, G8] with A3=440Hz (12-TET: twelve-tone equal temperament)
 	float tuning;		///< 1.f = +1 cent, -1.f = -1 cent
 	float velocity;		///< range [0.0, 1.0]
 	int32 length;		///< in sample frames (optional, Note Off has to follow in any case!)

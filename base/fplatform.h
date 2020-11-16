@@ -60,16 +60,20 @@
 	#define PLUGIN_API __stdcall
 	#define SMTG_PTHREADS	0
 
+	#define SMTG_EXPORT_SYMBOL __declspec (dllexport)
+
 	#ifndef _CRT_SECURE_NO_WARNINGS
 		#define _CRT_SECURE_NO_WARNINGS
 	#endif
 
-	#pragma warning (disable : 4244) // Conversion from 'type1' to 'type2', possible loss of data.
-	#pragma warning (disable : 4250) // Inheritance via dominance is allowed
-	#pragma warning (disable : 4996) // deprecated functions
+	#ifdef _MSC_VER
+		#pragma warning (disable : 4244) // Conversion from 'type1' to 'type2', possible loss of data.
+		#pragma warning (disable : 4250) // Inheritance via dominance is allowed
+		#pragma warning (disable : 4996) // deprecated functions
 
-	#pragma warning (3 : 4189) // local variable is initialized but not referenced
-	#pragma warning (3 : 4238) // nonstandard extension used : class rvalue used as lvalue
+		#pragma warning (3 : 4189) // local variable is initialized but not referenced
+		#pragma warning (3 : 4238) // nonstandard extension used : class rvalue used as lvalue
+	#endif
 
 	#if defined (_WIN64) || defined (_M_ARM64)
 		#define SMTG_PLATFORM_64 1
@@ -91,7 +95,7 @@
 //-----------------------------------------------------------------------------
 // LINUX
 //-----------------------------------------------------------------------------
-#elif __gnu_linux__
+#elif __gnu_linux__ || __linux__
 	#define SMTG_OS_LINUX	1
 	#define SMTG_OS_MACOS	0
 	#define SMTG_OS_WINDOWS	0
@@ -113,6 +117,8 @@
 	#define COM_COMPATIBLE	0
 	#define PLUGIN_API
 	#define SMTG_PTHREADS	1
+
+	#define SMTG_EXPORT_SYMBOL __attribute__ ((visibility ("default")))
 
 	#if __LP64__
 		#define SMTG_PLATFORM_64 1
@@ -170,6 +176,8 @@
 	#define COM_COMPATIBLE	0
 	#define PLUGIN_API
 	#define SMTG_PTHREADS	1
+
+	#define SMTG_EXPORT_SYMBOL __attribute__ ((visibility ("default")))
 
 	#if !defined(__PLIST__) && !defined(SMTG_DISABLE_DEFAULT_DIAGNOSTICS)
 		#ifdef __clang__

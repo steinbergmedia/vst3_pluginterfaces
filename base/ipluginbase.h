@@ -386,7 +386,7 @@ DECLARE_CLASS_IID (IPluginFactory3, 0x4555A2AB, 0xC1234E57, 0x9B122910, 0x368789
 Any plug-in must define and export this function. \n
 A typical implementation of GetPluginFactory looks like this
 \code{.cpp}
-IPluginFactory* PLUGIN_API GetPluginFactory ()
+SMTG_EXPORT_SYMBOL IPluginFactory* PLUGIN_API GetPluginFactory ()
 {
 	if (!gPluginFactory)
 	{
@@ -420,6 +420,6 @@ IPluginFactory* PLUGIN_API GetPluginFactory ()
 */
 extern "C"
 {
-	Steinberg::IPluginFactory* PLUGIN_API GetPluginFactory ();
+	SMTG_EXPORT_SYMBOL Steinberg::IPluginFactory* PLUGIN_API GetPluginFactory ();
 	typedef Steinberg::IPluginFactory* (PLUGIN_API *GetFactoryProc) ();
 }
