@@ -47,14 +47,15 @@
 #endif
 
 #if SMTG_OS_LINUX
-#ifdef __ANDROID__
+#if defined(__ANDROID__) || defined(_LIBCPP_VERSION)
+#define SMTG_LINUX_USE_STDATOMIC 1
 #include <stdatomic.h>
 #else
+#define SMTG_LINUX_USE_STDATOMIC 0
 #include <ext/atomicity.h>
 #endif
 #include <stdlib.h>
 #endif
-
 namespace Steinberg {
 
 //------------------------------------------------------------------------
@@ -95,7 +96,7 @@ int32 PLUGIN_API atomicAdd (int32& var, int32 d)
 #else
 	return OSAtomicAdd32Barrier (d, (int32_t*)&var);
 #endif
-#elif defined(__ANDROID__)
+#elif SMTG_LINUX_USE_STDATOMIC
 	return atomic_fetch_add ((atomic_int*)&var, d) + d;
 #elif SMTG_OS_LINUX
 	__gnu_cxx::__atomic_add (&var, d);
