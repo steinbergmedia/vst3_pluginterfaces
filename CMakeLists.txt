@@ -37,51 +37,68 @@ add_library(pluginterfaces STATIC
     base/ustring.h
 )
 
+# check for C11 atomic header
+include(CheckIncludeFileCXX)
+CHECK_INCLUDE_FILE_CXX("stdatomic.h" SMTG_USE_STDATOMIC_H)
+if(SMTG_USE_STDATOMIC_H)
+    target_compile_definitions(pluginterfaces
+        PRIVATE
+            "SMTG_USE_STDATOMIC_H=${SMTG_USE_STDATOMIC_H}"
+    )
+endif(SMTG_USE_STDATOMIC_H)
+
 # vst3 interfaces
 if (VST_SDK)
-    target_sources(pluginterfaces PRIVATE
-        gui/iplugview.h
-        gui/iplugviewcontentscalesupport.h
-        vst/ivstattributes.h
-        vst/ivstaudioprocessor.h
-        vst/ivstautomationstate.h
-        vst/ivstchannelcontextinfo.h
-        vst/ivstcomponent.h
-        vst/ivstcontextmenu.h
-        vst/ivsteditcontroller.h
-        vst/ivstevents.h
-        vst/ivsthostapplication.h
-        vst/ivstinterappaudio.h
-        vst/ivstmessage.h
-        vst/ivstmidicontrollers.h
-        vst/ivstmidilearn.h
-        vst/ivstnoteexpression.h
-        vst/ivstparameterchanges.h
-        vst/ivstparameterfunctionname.h
-        vst/ivstphysicalui.h
-        vst/ivstpluginterfacesupport.h
-        vst/ivstplugview.h
-        vst/ivstprefetchablesupport.h
-        vst/ivstprocesscontext.h
-        vst/ivstrepresentation.h
-        vst/ivstunits.h
-        vst/vstpresetkeys.h
-        vst/vstpshpack4.h
-        vst/vstspeaker.h
-        vst/vsttypes.h
+    target_sources(pluginterfaces
+        PRIVATE
+            gui/iplugview.h
+            gui/iplugviewcontentscalesupport.h
+            vst/ivstattributes.h
+            vst/ivstaudioprocessor.h
+            vst/ivstautomationstate.h
+            vst/ivstchannelcontextinfo.h
+            vst/ivstcomponent.h
+            vst/ivstcontextmenu.h
+            vst/ivsteditcontroller.h
+            vst/ivstevents.h
+            vst/ivsthostapplication.h
+            vst/ivstinterappaudio.h
+            vst/ivstmessage.h
+            vst/ivstmidicontrollers.h
+            vst/ivstmidilearn.h
+            vst/ivstnoteexpression.h
+            vst/ivstparameterchanges.h
+            vst/ivstparameterfunctionname.h
+            vst/ivstphysicalui.h
+            vst/ivstpluginterfacesupport.h
+            vst/ivstplugview.h
+            vst/ivstprefetchablesupport.h
+            vst/ivstprocesscontext.h
+            vst/ivstrepresentation.h
+            vst/ivstunits.h
+            vst/vstpresetkeys.h
+            vst/vstpshpack4.h
+            vst/vstspeaker.h
+            vst/vsttypes.h
 )
 endif()
 
 # ski interfaces
 if (SKI_SDK)
-    target_sources(pluginterfaces PRIVATE
-        host/paramids.cpp 
-        host/paramids.h
-)
+    target_sources(pluginterfaces
+        PRIVATE
+            host/paramids.cpp 
+            host/paramids.h
+    )
 endif()
 
 target_include_directories(pluginterfaces PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/..
+)
+
+target_compile_features(pluginterfaces
+    PUBLIC
+        cxx_std_11
 )
 
 smtg_setup_universal_binary(pluginterfaces)

@@ -274,7 +274,7 @@ inline FVariant& FVariant::operator= (const FVariant& variant)
 	}
 	else if ((type & kString16) && variant.string16)
 	{
-		int32 len = strlen16 (variant.string16);
+		auto len = static_cast<size_t> (strlen16 (variant.string16));
 		string16 = new char16[len + 1];
 		char16* tmp = const_cast<char16*> (string16);
 		memcpy (tmp, variant.string16, len * sizeof (char16));

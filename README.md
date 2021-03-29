@@ -1,4 +1,4 @@
-# Welcome to VST SDK 3 Interfaces
+# Welcome to VST 3 SDK Interfaces
 
 Here are located all VST interfaces definitions (including VST Component/Controller, UI, Test).
 

@@ -301,11 +301,15 @@ const SpeakerArrangement k140			 = kSpeakerL | kSpeakerR | kSpeakerLs | kSpeaker
                                            kSpeakerTfl | kSpeakerTfr | kSpeakerTrl | kSpeakerTrr |
                                            kSpeakerBfl | kSpeakerBfr | kSpeakerBrl | kSpeakerBrr;
 
+/** L R C Ls Rs Lc Rc Cs Sl Sr Tc Tfl Tfc Tfr Trl Trc Trr Tsl Tsr Bfl Bfc Bfr */			// 10.0.9.3
+const SpeakerArrangement k220			 = kSpeakerL  | kSpeakerR | kSpeakerC  | kSpeakerLs | kSpeakerRs | kSpeakerLc | kSpeakerRc | kSpeakerCs | kSpeakerSl | kSpeakerSr | 
+                                           kSpeakerTc | kSpeakerTfl | kSpeakerTfc | kSpeakerTfr | kSpeakerTrl | kSpeakerTrc | kSpeakerTrr | kSpeakerTsl | kSpeakerTsr | 
+                                           kSpeakerBfl| kSpeakerBfc | kSpeakerBfr;
+
 /** L R C Lfe Ls Rs Lc Rc Cs Sl Sr Tc Tfl Tfc Tfr Trl Trc Trr Lfe2 Tsl Tsr Bfl Bfc Bfr */	// 10.2.9.3
 const SpeakerArrangement k222			 = kSpeakerL  | kSpeakerR | kSpeakerC  | kSpeakerLfe | kSpeakerLs | kSpeakerRs | kSpeakerLc | kSpeakerRc | kSpeakerCs | kSpeakerSl | kSpeakerSr | 
                                            kSpeakerTc | kSpeakerTfl | kSpeakerTfc | kSpeakerTfr | kSpeakerTrl | kSpeakerTrc | kSpeakerTrr | kSpeakerLfe2 | kSpeakerTsl | kSpeakerTsr | 
                                            kSpeakerBfl| kSpeakerBfc | kSpeakerBfr;
-
 
 //------------------------------------------------------------------------
 /** Speaker Arrangement String Representation.
@@ -338,10 +342,14 @@ const CString kString60Cine		= "6.0 Cine";
 const CString kString60Music	= "6.0 Music";
 const CString kString61Cine		= "6.1 Cine";
 const CString kString61Music	= "6.1 Music";
-const CString kString70Cine		= "7.0 Cine (SDDS)";
-const CString kString70Music	= "7.0 Music (Dolby)";
-const CString kString71Cine		= "7.1 Cine (SDDS)";
-const CString kString71Music	= "7.1 Music (Dolby)";
+const CString kString70Cine		= "7.0 SDDS";
+const CString kString70CineOld	= "7.0 Cine (SDDS)";
+const CString kString70Music	= "7.0";
+const CString kString70MusicOld = "7.0 Music (Dolby)";
+const CString kString71Cine		= "7.1 SDDS";
+const CString kString71CineOld	= "7.1 Cine (SDDS)";
+const CString kString71Music	= "7.1";
+const CString kString71MusicOld	= "7.1 Music (Dolby)";
 const CString kString71CineTopCenter	= "7.1 Cine Top Center";
 const CString kString71CineCenterHigh	= "7.1 Cine Center High";
 const CString kString71CineFrontHigh	= "7.1 Cine Front High";
@@ -380,6 +388,7 @@ const CString kString131		= "13.1 Auro-3D";
 const CString kString81MPEG		= "8.1 MPEG";
 const CString kString140		= "14.0";
 const CString kString222		= "22.2";
+const CString kString220		= "22.0";
 const CString kStringAmbi1stOrder = "1st Order Ambisonics";
 const CString kStringAmbi2cdOrder = "2nd Order Ambisonics";
 const CString kStringAmbi3rdOrder = "3rd Order Ambisonics";
@@ -457,6 +466,7 @@ const CString kString122S		= "L R C LFE Ls Rs Lc Rc Tfl Tfc Tfr Trl Trr LFE2";
 const CString kString81MPEGS	= "L R LFE Ls Rs Tfl Tfc Tfr Bfc";
 const CString kString140S		= "L R Ls Rs Sl Sr Tfl Tfr Trl Trr Bfl Bfr Brl Brr";
 const CString kString222S		= "L R C LFE Ls Rs Lc Rc Cs Sl Sr Tc Tfl Tfc Tfr Trl Trc Trr LFE2 Tsl Tsr Bfl Bfc Bfr";
+const CString kString220S		= "L R C Ls Rs Lc Rc Cs Sl Sr Tc Tfl Tfc Tfr Trl Trc Trr Tsl Tsr Bfl Bfc Bfr";
 
 const CString kStringAmbi1stOrderS	= "0 1 2 3";
 const CString kStringAmbi2cdOrderS	= "0 1 2 3 4 5 6 7 8";
@@ -662,13 +672,13 @@ inline SpeakerArrangement getSpeakerArrangementFromString (CString arrStr)
 		return k61Cine;
 	if (!strcmp8 (arrStr, kString61Music))
 		return k61Music;
-	if (!strcmp8 (arrStr, kString70Cine))
+	if (!strcmp8 (arrStr, kString70Cine) || !strcmp8 (arrStr, kString70CineOld))
 		return k70Cine;
-	if (!strcmp8 (arrStr, kString70Music))
+	if (!strcmp8 (arrStr, kString70Music) || !strcmp8 (arrStr, kString70MusicOld))
 		return k70Music;
-	if (!strcmp8 (arrStr, kString71Cine))
+	if (!strcmp8 (arrStr, kString71Cine) || !strcmp8 (arrStr, kString71CineOld))
 		return k71Cine;
-	if (!strcmp8 (arrStr, kString71Music))
+	if (!strcmp8 (arrStr, kString71Music) || !strcmp8 (arrStr, kString71MusicOld))
 		return k71Music;
 	if (!strcmp8 (arrStr, kString71Proximity))
 		return k71Proximity;
@@ -746,6 +756,8 @@ inline SpeakerArrangement getSpeakerArrangementFromString (CString arrStr)
 		return k140;
 	if (!strcmp8 (arrStr, kString222))
 		return k222;
+	if (!strcmp8 (arrStr, kString220))
+		return k220;
 	if (!strcmp8 (arrStr, kStringAmbi1stOrder))
 		return kAmbi1stOrderACN;
 	if (!strcmp8 (arrStr, kStringAmbi2cdOrder))
@@ -830,6 +842,7 @@ inline CString getSpeakerArrangementString (SpeakerArrangement arr, bool withSpe
 		case k131:				return withSpeakersName ? kString131S		: kString131;
 		case k140:				return withSpeakersName ? kString140S		: kString140;
 		case k222:				return withSpeakersName ? kString222S		: kString222;
+		case k220:				return withSpeakersName ? kString220S		: kString220;
 			break;
 	}
 

@@ -21,6 +21,10 @@
 #include "pluginterfaces/base/smartpointer.h"
 #include <cstring>
 
+#if SMTG_CPP11_STDLIBSUPPORT
+#include <type_traits>
+#endif
+
 //------------------------------------------------------------------------
 /*! \defgroup pluginBase Basic Interfaces
 */
@@ -421,11 +425,72 @@ public:
 #endif
 };
 
+#if SMTG_CPP11_STDLIBSUPPORT
+
+//------------------------------------------------------------------------
+namespace FUnknownPrivate {
+
+template <typename T>
+struct Void : std::false_type
+{
+	using Type = void;
+};
+
+template <typename T>
+using VoidT = typename Void<T>::Type;
+
+//------------------------------------------------------------------------
+/**
+ *  This type trait detects if a class has an @c iid member variable. It is used to detect if
+ *  the FUID and DECLARE_CLASS_IID method or the SKI::UID method is used.
+ */
+template <typename T, typename U = void>
+struct HasIIDType : std::false_type
+{
+};
+
+//------------------------------------------------------------------------
+template <typename T>
+struct HasIIDType<T, FUnknownPrivate::VoidT<typename T::IID>> : std::true_type
+{
+};
+
+//------------------------------------------------------------------------
+} // FUnknownPrivate
+
+//------------------------------------------------------------------------
+/** @return the TUID for a SKI interface which uses the SKI::UID method. */
+template <typename T,
+          typename std::enable_if<FUnknownPrivate::HasIIDType<T>::value>::type* = nullptr>
+const TUID& getTUID ()
+{
+	return T::IID::toTUID ();
+}
+
+//------------------------------------------------------------------------
+/** @return the TUID for a SKI interface which uses the FUID and DECLARE_CLASS_IID method. */
+template <typename T,
+          typename std::enable_if<!FUnknownPrivate::HasIIDType<T>::value>::type* = nullptr>
+const TUID& getTUID ()
+{
+	return T::iid.toTUID ();
+}
+
+#else // SMTG_CPP11_STDLIBSUPPORT
+
+template<typename T>
+const TUID& getTUID ()
+{
+	return T::iid.toTUID ();
+}
+
+#endif // SMTG_CPP11_STDLIBSUPPORT
+
 //------------------------------------------------------------------------
 template <class I>
 inline FUnknownPtr<I>::FUnknownPtr (FUnknown* unknown)
 {
-	if (unknown && unknown->queryInterface (I::iid, (void**)&this->ptr) != kResultOk)
+	if (unknown && unknown->queryInterface (getTUID<I> (), (void**)&this->ptr) != kResultOk)
 		this->ptr = 0;
 }
 
@@ -434,7 +499,7 @@ template <class I>
 inline I* FUnknownPtr<I>::operator= (FUnknown* unknown)
 {
 	I* newPtr = 0;
-	if (unknown && unknown->queryInterface (I::iid, (void**)&newPtr) == kResultOk)
+	if (unknown && unknown->queryInterface (getTUID<I> (), (void**)&newPtr) == kResultOk)
 	{
 		OPtr<I> rel (newPtr);
 		return IPtr<I>::operator= (newPtr);
