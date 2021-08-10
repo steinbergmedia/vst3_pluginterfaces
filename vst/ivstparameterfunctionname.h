@@ -26,7 +26,6 @@
 //------------------------------------------------------------------------
 namespace Steinberg {
 namespace Vst {
-
 namespace FunctionNameType {
 //--------------------------------------------------------------------
 	const CString kCompGainReduction			= "Comp:GainReduction"; /**  */
@@ -44,6 +43,12 @@ namespace FunctionNameType {
 											1.0 means Wet Signal only */
     const CString kRandomize = "Randomize"; /**	Allow to assign some randomized values to some
                                                parameters in a controlled way*/
+
+	/// Panner Type
+	const CString kPanPosCenterX = "PanPosCenterX";	///< Gravity point X-axis [0, 1]=>[L-R] (for stereo: middle between left and right)
+	const CString kPanPosCenterY = "PanPosCenterY";	///< Gravity point Y-axis [0, 1]=>[Front-Rear]
+	const CString kPanPosCenterZ = "PanPosCenterZ";	///< Gravity point Z-axis [0, 1]=>[Bottom-Top]
+
 
 } // FunctionNameType
 
@@ -80,6 +85,7 @@ class MyController : public Vst::EditController, public Vst::IParameterFunctionN
 		...
 		DEF_INTERFACE (Vst::IParameterFunctionName)
 	END_DEFINE_INTERFACES (Vst::EditController)
+	DELEGATE_REFCOUNT (Vst::EditController)
 	...
 }
 
