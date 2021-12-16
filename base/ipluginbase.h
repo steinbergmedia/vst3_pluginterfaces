@@ -64,7 +64,7 @@ struct PFactoryInfo
 	{
 		kNoFlags					= 0,		///< Nothing
 		kClassesDiscardable			= 1 << 0,	///< The number of exported classes can change each time the Module is loaded. If this flag is set, the host does not cache class information. This leads to a longer startup time because the host always has to load the Module to get the current class information.
-		kLicenseCheck				= 1 << 1,	///< Class IDs of components are interpreted as Syncrosoft-License (LICENCE_UID). Loaded in a Steinberg host, the module will not be loaded when the license is not valid
+		kLicenseCheck				= 1 << 1,	///< This flag is deprecated, do not use anynomre, resp. it will get ignored from Cubase/Nuendo 12 and later.
 		kComponentNonDiscardable	= 1 << 3,	///< Component will not be unloaded until process exit
 		kUnicode                    = 1 << 4    ///< Components have entirely unicode encoded strings. (True for VST 3 plug-ins so far)
 	};
@@ -80,9 +80,13 @@ struct PFactoryInfo
 	char8 vendor[kNameSize];		///< e.g. "Steinberg Media Technologies"
 	char8 url[kURLSize];			///< e.g. "http://www.steinberg.de"
 	char8 email[kEmailSize];		///< e.g. "info@steinberg.de"
-	int32 flags;				///< (see above)
+	int32 flags;					///< (see FactoryFlags above)
 //------------------------------------------------------------------------
-	PFactoryInfo (const char8* _vendor, const char8* _url, const char8* _email, int32 _flags)
+	SMTG_CONSTEXPR14 PFactoryInfo (const char8* _vendor, const char8* _url, const char8* _email,
+	                               int32 _flags)
+#if SMTG_CPP14
+	: vendor (), url (), email (), flags ()
+#endif
 	{
 		strncpy8 (vendor, _vendor, kNameSize);
 		strncpy8 (url, _url, kURLSize);
@@ -123,10 +127,18 @@ struct PClassInfo
 	char8 name[kNameSize];          ///< class name, visible to the user
 //------------------------------------------------------------------------
 
-	PClassInfo (const TUID _cid, int32 _cardinality, const char8* _category, const char8* _name)
+	SMTG_CONSTEXPR14 PClassInfo (const TUID _cid, int32 _cardinality, const char8* _category,
+	                             const char8* _name)
+#if SMTG_CPP14
+	: cid (), cardinality (), category (), name ()
+#endif
 	{
+#if SMTG_CPP14
+		copyTUID (cid, _cid);
+#else
 		memset (this, 0, sizeof (PClassInfo));
 		memcpy (cid, _cid, sizeof (TUID));
+#endif
 		if (_category)
 			strncpy8 (category, _category, kCategorySize);
 		if (_name)
@@ -205,12 +217,28 @@ struct PClassInfo2
 
 //------------------------------------------------------------------------
 
-	PClassInfo2 (const TUID _cid, int32 _cardinality, const char8* _category, const char8* _name,
-		int32 _classFlags, const char8* _subCategories, const char8* _vendor, const char8* _version,
-		const char8* _sdkVersion)
+	SMTG_CONSTEXPR14 PClassInfo2 (const TUID _cid, int32 _cardinality, const char8* _category,
+	                              const char8* _name, int32 _classFlags,
+	                              const char8* _subCategories, const char8* _vendor,
+	                              const char8* _version, const char8* _sdkVersion)
+#if SMTG_CPP14
+	: cid ()
+	, cardinality ()
+	, category ()
+	, name ()
+	, classFlags ()
+	, subCategories ()
+	, vendor ()
+	, version ()
+	, sdkVersion ()
+#endif
 	{
+#if SMTG_CPP14
+		copyTUID (cid, _cid);
+#else
 		memset (this, 0, sizeof (PClassInfo2));
 		memcpy (cid, _cid, sizeof (TUID));
+#endif
 		cardinality = _cardinality;
 		if (_category)
 			strncpy8 (category, _category, PClassInfo::kCategorySize);
@@ -288,12 +316,28 @@ struct PClassInfoW
 	char16 sdkVersion[kVersionSize];	///< SDK version used to build this class (e.g. "VST 3.0")
 
 //------------------------------------------------------------------------
-	PClassInfoW (const TUID _cid, int32 _cardinality, const char8* _category, const char16* _name,
-		int32 _classFlags, const char8* _subCategories, const char16* _vendor, const char16* _version,
-		const char16* _sdkVersion)
+	SMTG_CONSTEXPR14 PClassInfoW (const TUID _cid, int32 _cardinality, const char8* _category,
+	                              const char16* _name, int32 _classFlags,
+	                              const char8* _subCategories, const char16* _vendor,
+	                              const char16* _version, const char16* _sdkVersion)
+#if SMTG_CPP14
+	: cid ()
+	, cardinality ()
+	, category ()
+	, name ()
+	, classFlags ()
+	, subCategories ()
+	, vendor ()
+	, version ()
+	, sdkVersion ()
+#endif
 	{
+#if SMTG_CPP14
+		copyTUID (cid, _cid);
+#else
 		memset (this, 0, sizeof (PClassInfoW));
 		memcpy (cid, _cid, sizeof (TUID));
+#endif
 		cardinality = _cardinality;
 		if (_category)
 			strncpy8 (category, _category, PClassInfo::kCategorySize);
@@ -326,9 +370,13 @@ struct PClassInfoW
 	PClassInfoW () { memset (this, 0, sizeof (PClassInfoW)); }
 #endif
 
-	void fromAscii (const PClassInfo2& ci2)
+	SMTG_CONSTEXPR14 void fromAscii (const PClassInfo2& ci2)
 	{
+#if SMTG_CPP14
+		copyTUID (cid, ci2.cid);
+#else
 		memcpy (cid, ci2.cid, sizeof (TUID));
+#endif
 		cardinality = ci2.cardinality;
 		strncpy8 (category, ci2.category, PClassInfo::kCategorySize);
 		str8ToStr16 (name, ci2.name, PClassInfo::kNameSize);

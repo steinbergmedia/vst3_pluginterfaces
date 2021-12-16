@@ -18,6 +18,7 @@ add_library(pluginterfaces STATIC
     base/ftypes.h
     base/funknown.cpp
     base/funknown.h
+    base/funknownimpl.h
     base/futils.h
     base/fvariant.h
     base/geoconstants.h
@@ -101,11 +102,11 @@ target_compile_features(pluginterfaces
         cxx_std_11
 )
 
-smtg_setup_universal_binary(pluginterfaces)
+smtg_target_setup_universal_binary(pluginterfaces)
 
 # iOS target
 if(SMTG_MAC AND XCODE AND SMTG_IOS_DEVELOPMENT_TEAM)
 	get_target_property(PLUGINTERFACES_SOURCES pluginterfaces SOURCES)
 	add_library(pluginterfaces_ios STATIC ${PLUGINTERFACES_SOURCES})
-	smtg_set_platform_ios(pluginterfaces_ios)
+	smtg_target_set_platform_ios(pluginterfaces_ios)
 endif()

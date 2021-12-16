@@ -16,6 +16,7 @@
 
 #pragma once
 
+// values for BYTEORDER according to the used platform
 #define kLittleEndian	0
 #define kBigEndian		1
 
@@ -38,21 +39,37 @@
 //-----------------------------------------------------------------------------
 #if defined (_WIN32)
 	//-----------------------------------------------------------------------------
-	// ARM32 AND ARM64 (WINDOWS)
-	#if (defined(_M_ARM64) || defined(_M_ARM))
-		#define SMTG_OS_WINDOWS_ARM	1
-	#endif
-
 	#define SMTG_OS_LINUX	0
 	#define SMTG_OS_MACOS	0
 	#define SMTG_OS_WINDOWS	1
 	#define SMTG_OS_IOS		0
 	#define SMTG_OS_OSX		0
 
-	#define SMTG_CPU_X86	_M_IX86
-	#define SMTG_CPU_X86_64	_M_AMD64
-	#define SMTG_CPU_ARM	(_M_ARM && !_M_ARM64)
-	#define SMTG_CPU_ARM_64	_M_ARM64
+	#if defined(_M_IX86)
+		#define SMTG_CPU_X86	1
+	#else
+		#define SMTG_CPU_X86	0
+	#endif
+	#if defined(_M_AMD64)
+		#define SMTG_CPU_X86_64	1
+	#else
+		#define SMTG_CPU_X86_64	0
+	#endif
+	#if defined(_M_ARM)
+		#define SMTG_CPU_ARM	1
+	#else
+		#define SMTG_CPU_ARM	0
+	#endif
+	#if defined(_M_ARM64)
+		#define SMTG_CPU_ARM_64	1
+	#else
+		#define SMTG_CPU_ARM_64	0
+	#endif
+	#if defined(_M_ARM64EC)
+		#define SMTG_CPU_ARM_64EC	1
+	#else
+		#define SMTG_CPU_ARM_64EC	0
+	#endif
 
 	#define BYTEORDER kLittleEndian
 	
@@ -89,6 +106,8 @@
 		#define SMTG_CPP11	__cplusplus >= 201103L || _MSC_VER > 1600 || SMTG_INTEL_CXX11_MODE
 		#define SMTG_CPP11_STDLIBSUPPORT SMTG_CPP11
 		#define SMTG_HAS_NOEXCEPT _MSC_VER >= 1900 || (SMTG_INTEL_CXX11_MODE && SMTG_INTEL_COMPILER >= 1300)
+		#define SMTG_CPP14 (__cplusplus >= 201402L || (defined (_MSVC_LANG) && _MSVC_LANG >= 201402L))
+		#define SMTG_CPP17 (__cplusplus >= 201703L || (defined (_MSVC_LANG) && _MSVC_LANG >= 201703L))
 	#endif
 
 	#define SMTG_DEPRECATED_ATTRIBUTE(message) __declspec (deprecated ("Is Deprecated: " message))
@@ -106,6 +125,7 @@
 	#define SMTG_CPU_X86_64	__x86_64__
 	#define SMTG_CPU_ARM	__arm__
 	#define SMTG_CPU_ARM_64	__aarch64__
+	#define SMTG_CPU_ARM_64EC 0
 
 	#include <endian.h>
 	#if __BYTE_ORDER == __LITTLE_ENDIAN
@@ -131,6 +151,8 @@
 		#ifndef SMTG_CPP11
 			#error unsupported compiler
 		#endif
+		#define SMTG_CPP14 (__cplusplus >= 201402L)
+		#define SMTG_CPP17 (__cplusplus >= 201703L)
 		#if defined(__GNUG__) && __GNUG__ < 8
 			#define SMTG_CPP11_STDLIBSUPPORT 0
 		#else
@@ -153,6 +175,7 @@
 	#define SMTG_CPU_X86_64	TARGET_CPU_X86_64
 	#define SMTG_CPU_ARM	TARGET_CPU_ARM
 	#define SMTG_CPU_ARM_64	TARGET_CPU_ARM64
+	#define SMTG_CPU_ARM_64EC 0
 
 	#if !SMTG_OS_IOS
 		#ifndef __CF_USE_FRAMEWORK_INCLUDES__
@@ -203,6 +226,8 @@
 	#ifdef __cplusplus
 		#include <cstddef>
 		#define SMTG_CPP11 (__cplusplus >= 201103L || SMTG_INTEL_CXX11_MODE)
+		#define SMTG_CPP14 (__cplusplus >= 201402L)
+		#define SMTG_CPP17 (__cplusplus >= 201703L)
 		#if defined (_LIBCPP_VERSION) && SMTG_CPP11
 			#define SMTG_CPP11_STDLIBSUPPORT 1
 			#define SMTG_HAS_NOEXCEPT 1
@@ -211,8 +236,18 @@
 			#define SMTG_HAS_NOEXCEPT 0
 		#endif
 	#endif
+//-----------------------------------------------------------------------------
+// Unknown Platform
+//-----------------------------------------------------------------------------
 #else
 	#pragma error unknown platform
+#endif
+
+//-----------------------------------------------------------------------------
+#if SMTG_CPU_ARM_64EC || SMTG_CPU_ARM_64 || SMTG_CPU_ARM
+#define SMTG_OS_WINDOWS_ARM	1
+#else
+#define SMTG_OS_WINDOWS_ARM	0
 #endif
 
 //-----------------------------------------------------------------------------
@@ -240,6 +275,11 @@
 #else
 #define SMTG_OVERRIDE
 #define SMTG_CONSTEXPR
+#endif
+#if SMTG_CPP14
+#define SMTG_CONSTEXPR14 constexpr
+#else
+#define SMTG_CONSTEXPR14
 #endif
 #if SMTG_HAS_NOEXCEPT
 #define SMTG_NOEXCEPT noexcept
