@@ -2,7 +2,7 @@
 # pluginterfaces should actually be a header-only library,
 # but it has some sources as well which need compilation.
 
-cmake_minimum_required(VERSION 3.4.3)
+cmake_minimum_required(VERSION 3.19)
 
 project(smtg_pluginterfaces)
 
@@ -39,8 +39,16 @@ add_library(pluginterfaces STATIC
 )
 
 # check for C11 atomic header
-include(CheckIncludeFileCXX)
-CHECK_INCLUDE_FILE_CXX("stdatomic.h" SMTG_USE_STDATOMIC_H)
+include(CheckSourceCompiles)
+set(SMTG_CHECK_STDATOMIC_H_SRC
+"#include <stdatomic.h>
+int main () { 
+	atomic_int value; atomic_store (&value, 1); 
+	return 0; 
+}"
+)
+#set(CMAKE_REQUIRED_QUIET 1)
+check_source_compiles(CXX "${SMTG_CHECK_STDATOMIC_H_SRC}" SMTG_USE_STDATOMIC_H)
 if(SMTG_USE_STDATOMIC_H)
     target_compile_definitions(pluginterfaces
         PRIVATE

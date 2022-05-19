@@ -105,9 +105,11 @@
 	#ifdef __cplusplus
 		#define SMTG_CPP11	__cplusplus >= 201103L || _MSC_VER > 1600 || SMTG_INTEL_CXX11_MODE
 		#define SMTG_CPP11_STDLIBSUPPORT SMTG_CPP11
-		#define SMTG_HAS_NOEXCEPT _MSC_VER >= 1900 || (SMTG_INTEL_CXX11_MODE && SMTG_INTEL_COMPILER >= 1300)
 		#define SMTG_CPP14 (__cplusplus >= 201402L || (defined (_MSVC_LANG) && _MSVC_LANG >= 201402L))
 		#define SMTG_CPP17 (__cplusplus >= 201703L || (defined (_MSVC_LANG) && _MSVC_LANG >= 201703L))
+		#define SMTG_HAS_NOEXCEPT (_MSC_FULL_VER >= 190023026 || (SMTG_INTEL_CXX11_MODE && SMTG_INTEL_COMPILER >= 1300))
+		#define SMTG_HAS_CPP11_CONSTEXPR (_MSC_FULL_VER >= 190024210L || (SMTG_INTEL_CXX11_MODE && SMTG_INTEL_COMPILER >= 1500))
+		#define SMTG_HAS_CPP14_CONSTEXPR (((_MSC_VER >= 1915L) && (_MSVC_LANG >= 201402L)) || (SMTG_INTEL_CXX11_MODE && SMTG_INTEL_COMPILER > 1700))
 	#endif
 
 	#define SMTG_DEPRECATED_ATTRIBUTE(message) __declspec (deprecated ("Is Deprecated: " message))
@@ -123,8 +125,16 @@
 
 	#define SMTG_CPU_X86	__i386__
 	#define SMTG_CPU_X86_64	__x86_64__
-	#define SMTG_CPU_ARM	__arm__
-	#define SMTG_CPU_ARM_64	__aarch64__
+	#if defined(__arm__)
+		#define SMTG_CPU_ARM	__arm__
+	#else
+		#define SMTG_CPU_ARM	0
+	#endif
+	#if defined(__aarch64__)
+		#define SMTG_CPU_ARM_64	__aarch64__
+	#else
+		#define SMTG_CPU_ARM_64	0
+	#endif
 	#define SMTG_CPU_ARM_64EC 0
 
 	#include <endian.h>
@@ -159,6 +169,8 @@
 			#define SMTG_CPP11_STDLIBSUPPORT 1
 		#endif
 		#define SMTG_HAS_NOEXCEPT 1
+		#define SMTG_HAS_CPP11_CONSTEXPR SMTG_CPP11
+		#define SMTG_HAS_CPP14_CONSTEXPR SMTG_CPP14
 	#endif
 //-----------------------------------------------------------------------------
 // Mac and iOS
@@ -235,6 +247,8 @@
 			#define SMTG_CPP11_STDLIBSUPPORT 0
 			#define SMTG_HAS_NOEXCEPT 0
 		#endif
+		#define SMTG_HAS_CPP11_CONSTEXPR SMTG_CPP11
+		#define SMTG_HAS_CPP14_CONSTEXPR SMTG_CPP14
 	#endif
 //-----------------------------------------------------------------------------
 // Unknown Platform
@@ -244,7 +258,7 @@
 #endif
 
 //-----------------------------------------------------------------------------
-#if SMTG_CPU_ARM_64EC || SMTG_CPU_ARM_64 || SMTG_CPU_ARM
+#if SMTG_OS_WINDOWS && (SMTG_CPU_ARM_64EC || SMTG_CPU_ARM_64 || SMTG_CPU_ARM)
 #define SMTG_OS_WINDOWS_ARM	1
 #else
 #define SMTG_OS_WINDOWS_ARM	0
@@ -271,16 +285,22 @@
 //-----------------------------------------------------------------------------
 #if SMTG_CPP11
 #define SMTG_OVERRIDE override
-#define SMTG_CONSTEXPR constexpr
 #else
 #define SMTG_OVERRIDE
+#endif
+
+#if SMTG_HAS_CPP11_CONSTEXPR
+#define SMTG_CONSTEXPR constexpr
+#else
 #define SMTG_CONSTEXPR
 #endif
-#if SMTG_CPP14
+
+#if SMTG_HAS_CPP14_CONSTEXPR
 #define SMTG_CONSTEXPR14 constexpr
 #else
 #define SMTG_CONSTEXPR14
 #endif
+
 #if SMTG_HAS_NOEXCEPT
 #define SMTG_NOEXCEPT noexcept
 #else
