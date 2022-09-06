@@ -25,11 +25,7 @@
 // 16 bit string operations
 #if SMTG_CPP11	// if c++11 unicode string literals
 	#define SMTG_CPP11_CAT_PRIVATE_DONT_USE(a,b)			a ## b
-	#if SMTG_OS_WINDOWS
-		#define STR16(x) SMTG_CPP11_CAT_PRIVATE_DONT_USE(L,x)
-	#else
-		#define STR16(x) SMTG_CPP11_CAT_PRIVATE_DONT_USE(u,x)
-	#endif
+	#define STR16(x) SMTG_CPP11_CAT_PRIVATE_DONT_USE(u,x)
 #else
 	#include "conststringtable.h"
 	#define STR16(x) Steinberg::ConstStringTable::instance ()->getString (x)
@@ -284,6 +280,14 @@ inline SMTG_CONSTEXPR14 bool FIDStringsEqual (FIDString id1, FIDString id2)
 }
 
 static SMTG_CONSTEXPR const uint32 kPrintfBufferSize = 4096;
+
+#if SMTG_OS_WINDOWS
+/* cast between wchar_t and char16 */
+inline wchar_t* wscast (char16* s) { static_assert (sizeof (wchar_t) == sizeof (char16), ""); return reinterpret_cast<wchar_t*> (s); }
+inline char16* wscast (wchar_t* s) { static_assert (sizeof (wchar_t) == sizeof (char16), ""); return reinterpret_cast<char16*> (s);}
+inline const wchar_t* wscast (const char16* s) { static_assert (sizeof (wchar_t) == sizeof (char16), ""); return reinterpret_cast<const wchar_t*> (s); }
+inline const char16* wscast (const wchar_t* s) { static_assert (sizeof (wchar_t) == sizeof (char16), ""); return reinterpret_cast<const char16*> (s); }
+#endif
 
 //------------------------------------------------------------------------
 } // namespace Steinberg

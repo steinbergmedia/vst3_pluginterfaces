@@ -206,11 +206,11 @@ typedef int64 LARGE_INT; // obsolete
 //------------------------------------------------------------------------
 //	FUID class declaration
 //------------------------------------------------------------------------
-typedef int8 TUID[16]; ///< plain UID type
+typedef char TUID[16]; ///< plain UID type
 
 #if SMTG_CPP14
 //------------------------------------------------------------------------
-inline SMTG_CONSTEXPR14 void copyTUID (int8* dst, const int8* src)
+inline SMTG_CONSTEXPR14 void copyTUID (char* dst, const char* src)
 {
 	for (auto i = 0; i < 16; ++i)
 		dst[i] = src[i];
@@ -314,7 +314,7 @@ public:
 	void print (char8* string = nullptr, int32 style = kINLINE_UID) const;
 
 	template <size_t N>
-	inline explicit FUID (const int8 (&uid)[N])
+	inline explicit FUID (const char (&uid)[N])
 	{
 #if SMTG_CPP11_STDLIBSUPPORT
 		static_assert (N == sizeof (TUID), "only TUID allowed");

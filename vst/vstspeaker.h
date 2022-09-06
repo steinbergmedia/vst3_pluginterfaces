@@ -249,13 +249,13 @@ const SpeakerArrangement k71_2			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeake
                                            kSpeakerSl | kSpeakerSr | kSpeakerTsl | kSpeakerTsr;
 const SpeakerArrangement k91Atmos		 = k71_2;		// 9.1 Dolby Atmos (3D)
 
-/** L R C Ls Rs Sl Sr Tsl Tsr Trc */					// 7.0.3 (ITU 3+7+0.0 Sound System F)
+/** L R C Ls Rs Sl Sr Tfl Tfr Trc */					// 7.0.3 (ITU 3+7+0.0 Sound System F)
 const SpeakerArrangement k70_3			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLs | kSpeakerRs | 
-                                           kSpeakerSl | kSpeakerSr | kSpeakerTsl | kSpeakerTsr | kSpeakerTrc;
+                                           kSpeakerSl | kSpeakerSr | kSpeakerTfl | kSpeakerTfr | kSpeakerTrc;
 
-/** L R C Lfe Ls Rs Sl Sr Tsl Tsr Trc Lfe2 */			// 7.2.3 (ITU 3+7+0.2 Sound System F)
+/** L R C Lfe Ls Rs Sl Sr Tfl Tfr Trc Lfe2 */			// 7.2.3 (ITU 3+7+0.2 Sound System F)
 const SpeakerArrangement k72_3			 = kSpeakerL  | kSpeakerR | kSpeakerC | kSpeakerLfe | kSpeakerLs | kSpeakerRs | 
-                                           kSpeakerSl | kSpeakerSr | kSpeakerTsl | kSpeakerTsr | kSpeakerTrc | kSpeakerLfe2;
+                                           kSpeakerSl | kSpeakerSr | kSpeakerTfl | kSpeakerTfr | kSpeakerTrc | kSpeakerLfe2;
 
 /** L R C Ls Rs Sl Sr Tfl Tfr Trl Trr */				// 7.0.4 (ITU 4+7+0.0 Sound System J)
 const SpeakerArrangement k70_4			 = kSpeakerL | kSpeakerR | kSpeakerC | kSpeakerLs | kSpeakerRs | kSpeakerSl | kSpeakerSr |
@@ -508,8 +508,8 @@ const CString kString50_4_1S	= "L R C Ls Rs Tfl Tfr Trl Trr Bfc";
 const CString kString51_4_1S	= "L R C LFE Ls Rs Tfl Tfr Trl Trr Bfc";
 const CString kString70_2S		= "L R C Ls Rs Sl Sr Tsl Tsr"; 
 const CString kString71_2S		= "L R C LFE Ls Rs Sl Sr Tsl Tsr";
-const CString kString70_3S		= "L R C Ls Rs Sl Sr Tsl Tsr Trc"; 
-const CString kString72_3S		= "L R C LFE Ls Rs Sl Sr Tsl Tsr Trc LFE";
+const CString kString70_3S		= "L R C Ls Rs Sl Sr Tfl Tfr Trc"; 
+const CString kString72_3S		= "L R C LFE Ls Rs Sl Sr Tfl Tfr Trc LFE2";
 const CString kString70_4S		= "L R C Ls Rs Sl Sr Tfl Tfr Trl Trr";
 const CString kString71_4S		= "L R C LFE Ls Rs Sl Sr Tfl Tfr Trl Trr";
 const CString kString70_6S		= "L R C Ls Rs Sl Sr Tfl Tfr Trl Trr Tsl Tsr";

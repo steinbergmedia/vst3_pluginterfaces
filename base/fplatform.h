@@ -78,6 +78,7 @@
 	#define SMTG_PTHREADS	0
 
 	#define SMTG_EXPORT_SYMBOL __declspec (dllexport)
+	#define SMTG_HIDDEN_SYMBOL
 
 	#ifndef _CRT_SECURE_NO_WARNINGS
 		#define _CRT_SECURE_NO_WARNINGS
@@ -149,6 +150,7 @@
 	#define SMTG_PTHREADS	1
 
 	#define SMTG_EXPORT_SYMBOL __attribute__ ((visibility ("default")))
+	#define SMTG_HIDDEN_SYMBOL __attribute__ ((visibility ("hidden")))
 
 	#if __LP64__
 		#define SMTG_PLATFORM_64 1
@@ -213,6 +215,7 @@
 	#define SMTG_PTHREADS	1
 
 	#define SMTG_EXPORT_SYMBOL __attribute__ ((visibility ("default")))
+	#define SMTG_HIDDEN_SYMBOL __attribute__ ((visibility ("hidden")))
 
 	#if !defined(__PLIST__) && !defined(SMTG_DISABLE_DEFAULT_DIAGNOSTICS)
 		#ifdef __clang__
