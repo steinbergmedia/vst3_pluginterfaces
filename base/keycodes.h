@@ -104,8 +104,10 @@ enum VirtualKeyCodes
 	KEY_F18,
 	KEY_F19,
 
+	KEY_SUPER,	// Win-Key on Windows, Ctrl-Key on macOS
+
 	VKEY_FIRST_CODE = KEY_BACK,
-	VKEY_LAST_CODE = KEY_F19,
+	VKEY_LAST_CODE = KEY_SUPER,
 
 	VKEY_FIRST_ASCII = 128
 	/*
@@ -115,7 +117,7 @@ enum VirtualKeyCodes
 };
 
 //------------------------------------------------------------------------------
-inline tchar VirtualKeyCodeToChar (uint8 vKey)
+inline SMTG_CONSTEXPR14 tchar VirtualKeyCodeToChar (uint8 vKey)
 {
 	if (vKey >= VKEY_FIRST_ASCII)
 		return (tchar)(vKey - VKEY_FIRST_ASCII + 0x30);
@@ -125,7 +127,7 @@ inline tchar VirtualKeyCodeToChar (uint8 vKey)
 }
 
 //------------------------------------------------------------------------------
-inline uint8 CharToVirtualKeyCode (tchar character)
+inline SMTG_CONSTEXPR14 uint8 CharToVirtualKeyCode (tchar character)
 {
 	if ((character >= 0x30 && character <= 0x39) || (character >= 0x41 && character <= 0x5A))
 		return (uint8)(character - 0x30 + VKEY_FIRST_ASCII);
@@ -137,29 +139,29 @@ inline uint8 CharToVirtualKeyCode (tchar character)
 /** OS-independent enumeration of virtual modifier-codes. */
 enum KeyModifier
 {
-	kShiftKey     = 1 << 0, ///< same on both PC and Mac
-	kAlternateKey = 1 << 1, ///< same on both PC and Mac
-	kCommandKey   = 1 << 2, ///< windows ctrl key; mac cmd key (apple button)
-	kControlKey   = 1 << 3  ///< windows: not assigned, mac: ctrl key
+	kShiftKey     = 1 << 0, ///< same on Windows and macOS
+	kAlternateKey = 1 << 1, ///< same on Windows and macOS
+	kCommandKey   = 1 << 2, ///< Windows: ctrl key; macOS: cmd key
+	kControlKey   = 1 << 3  ///< Wndows: win key, macOS: ctrl key
 };
 
 /** Simple data-struct representing a key-stroke on the keyboard. */
 struct KeyCode
 {
 	/** The associated character. */
-	tchar character;
+	tchar character {0};
 	/** The associated virtual key-code. */
-	uint8 virt;
+	uint8 virt {0};
 	/** The associated virtual modifier-code. */
-	uint8 modifier;
+	uint8 modifier {0};
 
 	/** Constructs a new KeyCode. */
-	explicit KeyCode (tchar character = 0, uint8 virt = 0, uint8 modifier = 0)
+	SMTG_CONSTEXPR14 KeyCode (tchar character = 0, uint8 virt = 0, uint8 modifier = 0)
 	: character (character), virt (virt), modifier (modifier)
 	{
 	}
 
-	inline KeyCode& operator= (const KeyCode& other) SMTG_NOEXCEPT
+	SMTG_CONSTEXPR14 KeyCode& operator= (const KeyCode& other) SMTG_NOEXCEPT
 	{
 		character = other.character;
 		virt = other.virt;
@@ -180,8 +182,8 @@ namespace KeyCodes {
 template <typename Key>
 bool isModifierOnlyKey (const Key& key)
 {
-	return (key.character == 0 
-		&& (key.virt == KEY_SHIFT || key.virt == KEY_ALT || key.virt == KEY_CONTROL));
+	return (key.character == 0 && (key.virt == KEY_SHIFT || key.virt == KEY_ALT ||
+	                               key.virt == KEY_CONTROL || key.virt == KEY_SUPER));
 }
 
 //------------------------------------------------------------------------

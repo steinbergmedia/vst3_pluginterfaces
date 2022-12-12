@@ -309,8 +309,14 @@ public:
 		kCLASS_UID    ///< "DECLARE_CLASS_IID (Interface, 0x00000000, 0x00000000, 0x00000000, 0x00000000)"
 	};
 	/** Prints the UID to a string (or debug output if string is NULL).
-	    \param string is the output string if not NULL.
-	    \param style can be chosen from the FUID::UIDPrintStyle enumeration. */
+	    \param style can be chosen from the FUID::UIDPrintStyle enumeration. 
+	    \param string is the output string if not NULL. 
+	    \param stringBufferSize is the size of the output string  */
+	void print (int32 style, char8* string = nullptr, size_t stringBufferSize = 0) const;
+
+#if SMTG_CPP17
+	[[deprecated ("Use the print method with the buffer size")]]
+#endif
 	void print (char8* string = nullptr, int32 style = kINLINE_UID) const;
 
 	template <size_t N>

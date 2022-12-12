@@ -43,7 +43,8 @@ include(CheckSourceCompiles)
 set(SMTG_CHECK_STDATOMIC_H_SRC
 "#include <stdatomic.h>
 int main () { 
-	atomic_int value; atomic_store (&value, 1); 
+	atomic_int_least32_t value = 0;
+	atomic_fetch_add (&value, 1); 
 	return 0; 
 }"
 )

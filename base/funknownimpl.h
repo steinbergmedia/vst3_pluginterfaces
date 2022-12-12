@@ -406,7 +406,7 @@ private:
 	{
 		if (match<Interface> (tuid) || match<Unknown> (tuid))
 		{
-			obj = static_cast<Interface*> (this);
+			obj = static_cast<Interface*> (this->unknownCast ());
 			return true;
 		}
 
