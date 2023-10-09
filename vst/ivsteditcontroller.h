@@ -614,6 +614,27 @@ public:
 DECLARE_CLASS_IID (IEditControllerHostEditing, 0xC1271208, 0x70594098, 0xB9DD34B3, 0x6BB0195E)
 
 //------------------------------------------------------------------------
+/** Extended plug-in interface IComponentHandler for an edit controller
+\ingroup vstIHost vst379
+- [host imp]
+- [extends IComponentHandler]
+- [released: 3.7.9]
+- [optional]
+*/
+//------------------------------------------------------------------------
+class IComponentHandlerSystemTime : public FUnknown
+{
+public:
+//------------------------------------------------------------------------
+	/** get the current systemTime (the same as the one used in ProcessContext::systemTime). */
+	virtual tresult PLUGIN_API getSystemTime (int64& systemTime) = 0;
+//------------------------------------------------------------------------
+	static const FUID iid;
+};
+
+DECLARE_CLASS_IID (IComponentHandlerSystemTime, 0xF9E53056, 0xD1554CD5, 0xB7695E1B, 0x7B0F7745)
+
+//------------------------------------------------------------------------
 } // namespace Vst
 } // namespace Steinberg
 

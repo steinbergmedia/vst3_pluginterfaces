@@ -145,6 +145,12 @@ namespace FUnknownImpl {
 /** Typedef to keep everything in this namespace. */
 using Unknown = FUnknown;
 
+/** A base class which hides the FUnknown::iid static var */
+struct HideIIDBase : FUnknown
+{
+	using iid = void;
+};
+
 /** Common destroyer policy for ski object instances.*/
 struct Destroyer
 {
@@ -449,7 +455,7 @@ using ImplementsNonDestroyable =
 /** Shortcut namespace for implementing FUnknown based objects. */
 namespace U {
 
-using FUnknownImpl::Unknown;
+using Unknown = FUnknownImpl::HideIIDBase;
 using FUnknownImpl::UID;
 using FUnknownImpl::Extends;
 using FUnknownImpl::Implements;

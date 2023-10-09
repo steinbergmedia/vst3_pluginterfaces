@@ -71,6 +71,7 @@ if (VST_SDK)
             vst/ivstcontextmenu.h
             vst/ivsteditcontroller.h
             vst/ivstevents.h
+            vst/ivstdataexchange.h
             vst/ivsthostapplication.h
             vst/ivstinterappaudio.h
             vst/ivstmessage.h
@@ -114,8 +115,9 @@ target_compile_features(pluginterfaces
 smtg_target_setup_universal_binary(pluginterfaces)
 
 # iOS target
-if(SMTG_MAC AND XCODE AND SMTG_IOS_DEVELOPMENT_TEAM)
+if(SMTG_MAC AND XCODE AND SMTG_ENABLE_IOS_TARGETS)
 	get_target_property(PLUGINTERFACES_SOURCES pluginterfaces SOURCES)
 	add_library(pluginterfaces_ios STATIC ${PLUGINTERFACES_SOURCES})
 	smtg_target_set_platform_ios(pluginterfaces_ios)
+	target_compile_features(pluginterfaces_ios PUBLIC cxx_std_14)
 endif()
