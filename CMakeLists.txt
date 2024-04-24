@@ -85,6 +85,7 @@ if (VST_SDK)
             vst/ivstplugview.h
             vst/ivstprefetchablesupport.h
             vst/ivstprocesscontext.h
+            vst/ivstremapparamid.h
             vst/ivstrepresentation.h
             vst/ivstunits.h
             vst/vstpresetkeys.h
