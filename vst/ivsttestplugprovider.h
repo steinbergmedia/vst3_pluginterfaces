@@ -71,12 +71,12 @@ public:
 	 */
 	virtual IEditController* PLUGIN_API getController () = 0;
 	/** release the component and/or controller */
-	virtual tresult PLUGIN_API releasePlugIn (IComponent* component,
-	                                          IEditController* controller) = 0;
+	virtual tresult PLUGIN_API releasePlugIn (IComponent* component /*in*/,
+	                                          IEditController* controller /*in*/) = 0;
 	/** get the sub categories of the plug-in */
-	virtual tresult PLUGIN_API getSubCategories (IStringResult& result) const = 0;
+	virtual tresult PLUGIN_API getSubCategories (IStringResult& result /*out*/) const = 0;
 	/** get the component UID of the plug-in */
-	virtual tresult PLUGIN_API getComponentUID (FUID& uid) const = 0;
+	virtual tresult PLUGIN_API getComponentUID (FUID& uid /*out*/) const = 0;
 
 //------------------------------------------------------------------------
 	static const FUID iid;

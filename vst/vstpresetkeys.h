@@ -51,8 +51,16 @@ namespace StateType {
 \defgroup stateType Context of State Restoration */
 /*@{*/
 //------------------------------------------------------------------------
-const CString kProject = "Project";		///< the state is restored from a project loading or it is saved in a project
-const CString kDefault = "Default";		///< the state is restored from a preset (marked as default) or the host wants to store a default state of the plug-in
+
+/** the state is restored from a project loading or it is saved in a project */
+const CString kProject = "Project";
+
+/** the state is restored from a preset (marked as default) or the host wants to store a default
+ * state of the plug-in */
+const CString kDefault = "Default";
+
+/** the state is restored from a track preset */
+const CString kTrackPreset = "TrackPreset";
 
 //------------------------------------------------------------------------
 /*@}*/

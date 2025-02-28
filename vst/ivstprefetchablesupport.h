@@ -81,7 +81,8 @@ class IPrefetchableSupport : public FUnknown
 public:
 //------------------------------------------------------------------------
 	/** retrieve the current prefetch support. Use IComponentHandler::restartComponent
-	   (kPrefetchableSupportChanged) to inform the host that this support has changed. */
+	 * (kPrefetchableSupportChanged) to inform the host that this support has changed.
+	 * \note [UI-thread & (Initialized | Connected | Setup Done | Activated | Processing)] */
 	virtual tresult PLUGIN_API getPrefetchableSupport (PrefetchableSupport& prefetchable /*out*/) = 0;
 
 //------------------------------------------------------------------------

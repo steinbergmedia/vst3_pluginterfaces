@@ -2,7 +2,7 @@
 # pluginterfaces should actually be a header-only library,
 # but it has some sources as well which need compilation.
 
-cmake_minimum_required(VERSION 3.19.0)
+cmake_minimum_required(VERSION 3.25.0)
 
 project(smtg_pluginterfaces)
 

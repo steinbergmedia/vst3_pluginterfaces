@@ -201,7 +201,7 @@ public:
 	virtual int32 PLUGIN_API getEventCount () = 0;
 
 	/** Gets parameter by index. */
-	virtual tresult PLUGIN_API getEvent (int32 index, Event& e /*out*/) = 0;
+	virtual tresult PLUGIN_API getEvent (int32 index /*in*/, Event& e /*out*/) = 0;
 
 	/** Adds a new event. */
 	virtual tresult PLUGIN_API addEvent (Event& e /*in*/) = 0;
