@@ -43,9 +43,8 @@ struct ProcessContext;
 namespace PlugType
 {
 /**
-\defgroup plugType Plug-in Type used for subCategories */
-/*@{*/
-//------------------------------------------------------------------------
+ * \defgroup plugType Plug-in Type used for subCategories
+ * @{ */
 SMTG_CONSTEXPR const CString kFx					= "Fx";				///< others type (not categorized)
 SMTG_CONSTEXPR const CString kFxAnalyzer			= "Fx|Analyzer";	///< Scope, FFT-Display, Loudness Processing...
 SMTG_CONSTEXPR const CString kFxBass				= "Fx|Bass";		///< Tools dedicated to Bass Guitar
@@ -94,8 +93,7 @@ SMTG_CONSTEXPR const CString kMono					= "Mono";			///< used for Mono only plug-
 SMTG_CONSTEXPR const CString kStereo				= "Stereo";			///< used for Stereo only plug-in [optional]
 SMTG_CONSTEXPR const CString kSurround				= "Surround";		///< used for Surround only plug-in [optional]
 
-//------------------------------------------------------------------------
-/*@}*/
+/**@}*/
 }
 
 //------------------------------------------------------------------------
@@ -110,8 +108,8 @@ enum ComponentFlags
 
 //------------------------------------------------------------------------
 /** Symbolic sample size.
-\see ProcessSetup, ProcessData
-*/
+ * \see ProcessSetup, ProcessData
+ */
 enum SymbolicSampleSizes
 {
 	kSample32,		///< 32-bit precision
@@ -120,30 +118,32 @@ enum SymbolicSampleSizes
 
 //------------------------------------------------------------------------
 /** Processing mode informs the plug-in about the context and at which frequency the process call is
-called. VST3 defines 3 modes:
-
-   - kRealtime: each process call is called at a realtime frequency (defined by [numSamples of
-ProcessData] / samplerate). The plug-in should always try to process as fast as possible in order to
-let enough time slice to other plug-ins.
-
-   - kPrefetch: each process call could be called at a variable frequency (jitter, slower / faster
-than realtime), the plug-in should process at the same quality level than realtime, plug-in must not
-slow down to realtime (e.g. disk streaming)! The host should avoid to process in kPrefetch mode such
-sampler based plug-in.
-
-   - kOffline:  each process call could be faster than realtime or slower, higher quality than
-realtime could be used. plug-ins using disk streaming should be sure that they have enough time in
-the process call for streaming, if needed by slowing down to realtime or slower.
-.
-Note about Process Modes switching:
-   - Switching between kRealtime and kPrefetch process modes are done in realtime thread without
-need of calling IAudioProcessor::setupProcessing, the plug-in should check in process call the
-member processMode of ProcessData in order to know in which mode it is processed.
-   - Switching between kRealtime (or kPrefetch) and kOffline requires that the host calls
-IAudioProcessor::setupProcessing in order to inform the plug-in about this mode change.
-.
-\see ProcessSetup, ProcessData
-*/
+ * called.
+ * .
+ * VST3 defines 3 modes:
+ *
+ *    - kRealtime: each process call is called at a realtime frequency (defined by [numSamples of
+ * ProcessData] / samplerate). The plug-in should always try to process as fast as possible in order
+ * to let enough time slice to other plug-ins.
+ *
+ *    - kPrefetch: each process call could be called at a variable frequency (jitter, slower /
+ * faster than realtime), the plug-in should process at the same quality level than realtime,
+ * plug-in must not slow down to realtime (e.g. disk streaming)! The host should avoid to process in
+ * kPrefetch mode such sampler based plug-in.
+ *
+ *    - kOffline:  each process call could be faster than realtime or slower, higher quality than
+ * realtime could be used. plug-ins using disk streaming should be sure that they have enough time
+ * in the process call for streaming, if needed by slowing down to realtime or slower.
+ * .
+ * Note about Process Modes switching:
+ *    - Switching between kRealtime and kPrefetch process modes are done in realtime thread without
+ * need of calling IAudioProcessor::setupProcessing, the plug-in should check in process call the
+ * member processMode of ProcessData in order to know in which mode it is processed.
+ *    - Switching between kRealtime (or kPrefetch) and kOffline requires that the host calls
+ * IAudioProcessor::setupProcessing in order to inform the plug-in about this mode change.
+ * .
+ * \see ProcessSetup, ProcessData
+ */
 enum ProcessModes
 {
 	kRealtime,		///< realtime processing
@@ -155,22 +155,22 @@ enum ProcessModes
 /** kNoTail
  *
  * to be returned by getTailSamples when no tail is wanted
- \see IAudioProcessor::getTailSamples
-*/
+ * \see IAudioProcessor::getTailSamples
+ */
 static const uint32 kNoTail = 0;
 
 //------------------------------------------------------------------------
 /** kInfiniteTail
  *
  * to be returned by getTailSamples when infinite tail is wanted
- \see IAudioProcessor::getTailSamples
+ * \see IAudioProcessor::getTailSamples
  */
 static const uint32 kInfiniteTail = kMaxInt32u;
 
 //------------------------------------------------------------------------
 /** Audio processing setup.
-\see IAudioProcessor::setupProcessing
-*/
+ * \see IAudioProcessor::setupProcessing
+ */
 struct ProcessSetup
 {
 //------------------------------------------------------------------------
@@ -216,11 +216,11 @@ struct AudioBusBuffers
 
 //------------------------------------------------------------------------
 /** Any data needed in audio processing.
-	The host prepares AudioBusBuffers for each input/output bus,
-	regardless of the bus activation state. Bus buffer indices always match
-	with bus indices used in IComponent::getBusInfo of media type kAudio.
-\see AudioBusBuffers, IParameterChanges, IEventList, ProcessContext, IProcessContextRequirements
-*/
+ * The host prepares AudioBusBuffers for each input/output bus,
+ * regardless of the bus activation state. Bus buffer indices always match
+ * with bus indices used in IComponent::getBusInfo of media type kAudio.
+ * \see AudioBusBuffers, IParameterChanges, IEventList, ProcessContext, IProcessContextRequirements
+ */
 struct ProcessData
 {
 	ProcessData ()

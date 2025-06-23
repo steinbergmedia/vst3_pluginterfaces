@@ -58,7 +58,7 @@ The kMain busses have to place before any others kAux busses.
 
 See also: IComponent::getBusInfo, IComponent::activateBus
 */
-/*@{*/
+/**@{*/
 
 //------------------------------------------------------------------------
 /** Bus media types */
@@ -115,7 +115,7 @@ struct BusInfo
 	};
 };
 
-/*@}*/
+/**@}*/
 
 //------------------------------------------------------------------------
 /** I/O modes */

@@ -70,7 +70,6 @@ public:
 
 DECLARE_CLASS_IID (IRemapParamID, 0x2B88021E, 0x6286B646, 0xB49DF76A, 0x5663061C)
 
-
 //------------------------------------------------------------------------
 } // namespace Vst
 } // namespace Steinberg

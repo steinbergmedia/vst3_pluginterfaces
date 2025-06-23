@@ -28,14 +28,13 @@ namespace Steinberg {
 namespace Vst {
 
 //------------------------------------------------------------------------
-/** \defgroup vst3typedef VST 3 Data Types */
-/*@{*/
-//------------------------------------------------------------------------
+/** \ingroup vst3typedef */
+/**@{*/
 /** Note Expression Types */
 typedef uint32 NoteExpressionTypeID;
 /** Note Expression Value */
 typedef double NoteExpressionValue;
-/*@}*/
+/**@}*/
 
 //------------------------------------------------------------------------
 /** NoteExpressionTypeIDs describes the type of the note expression.
@@ -147,8 +146,12 @@ struct NoteExpressionTypeInfo
 
 //------------------------------------------------------------------------
 /** Extended plug-in interface IEditController for note expression event support:
-Vst::INoteExpressionController \ingroup vstIPlug vst350 - [plug imp] - [extends IEditController] -
-[released: 3.5.0] - [optional]
+Vst::INoteExpressionController
+\ingroup vstIPlug vst350
+- [plug imp]
+- [extends IEditController]
+- [released: 3.5.0]
+- [optional]
 
 With this plug-in interface, the host can retrieve all necessary note expression information
 supported by the plug-in. Note expression information (\ref NoteExpressionTypeInfo) are specific for
@@ -207,6 +210,7 @@ enum KeyswitchTypeIDs : uint32
 	kKeyRangeTypeID				///< key should be maintained pressed for playing
 };
 
+/** \ingroup vst3typedef */
 typedef uint32 KeyswitchTypeID;
 
 //------------------------------------------------------------------------

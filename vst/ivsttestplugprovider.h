@@ -53,7 +53,6 @@ namespace Vst {
  *	test (see ITest).
  * 	You get this interface as the context argument in the ITestFactory::createTests method.
  */
-//------------------------------------------------------------------------
 class ITestPlugProvider : public FUnknown
 {
 public:

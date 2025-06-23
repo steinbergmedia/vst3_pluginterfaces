@@ -178,13 +178,13 @@ enum ChannelPluginLocation
 //------------------------------------------------------------------------
 // Colors
 //------------------------------------------------------------------------
-/** \defgroup vst3typedef VST 3 Data Types */
-/*@{*/
+/** \ingroup vst3typedef */
+/**@{*/
 //------------------------------------------------------------------------
 /** ARGB (Alpha-Red-Green-Blue) */
 typedef uint32 ColorSpec;
 typedef uint8 ColorComponent;
-/*@}*/
+/**@}*/
 
 /** Returns the Blue part of the given ColorSpec */
 inline ColorComponent GetBlue (ColorSpec cs)

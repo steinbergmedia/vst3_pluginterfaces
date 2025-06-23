@@ -27,12 +27,11 @@ namespace Steinberg {
 namespace Vst {
 
 //------------------------------------------------------------------------
-/** \defgroup vst3typedef VST 3 Data Types */
-/*@{*/
-//------------------------------------------------------------------------
+/** \ingroup vst3typedef */
+/**@{*/
 /** Physical UI Type */
 typedef uint32 PhysicalUITypeID;
-/*@}*/
+/**@}*/
 
 //------------------------------------------------------------------------
 /** PhysicalUITypeIDs describes the type of Physical UI (PUI) which could be associated to a note

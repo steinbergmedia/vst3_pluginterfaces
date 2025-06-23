@@ -155,7 +155,7 @@ struct Event
 		kUserReserved2 = 1 << 15	///< reserved for user (for internal use)
 	};
 
-	/**  Event Types - used for Event::type */
+	/** Event Types - used for Event::type */
 	enum EventTypes
 	{
 		kNoteOnEvent       = 0,			///< is \ref NoteOnEvent

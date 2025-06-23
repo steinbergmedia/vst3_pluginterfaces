@@ -41,6 +41,7 @@ class IAttributeList : public FUnknown
 {
 public:
 //------------------------------------------------------------------------
+	/** \ingroup vst3typedef */
 	typedef const char* AttrID;
 
 	/** Sets integer value. */

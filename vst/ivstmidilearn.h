@@ -102,7 +102,6 @@ public:
 
 DECLARE_CLASS_IID (IMidiLearn, 0x6B2449CC, 0x419740B5, 0xAB3C79DA, 0xC5FE5C86)
 
-
 //------------------------------------------------------------------------
 } // namespace Vst
 } // namespace Steinberg

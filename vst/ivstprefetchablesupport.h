@@ -28,12 +28,11 @@ namespace Steinberg {
 namespace Vst {
 
 // ------------------------------------------------------------------------
-/** \defgroup vst3typedef VST 3 Data Types */
-/*@{*/
-//------------------------------------------------------------------------
+/** \ingroup vst3typedef */
+/**@{*/
 /** Prefetchable Support Type */
 typedef uint32 PrefetchableSupport;
-/*@}*/
+/**@}*/
 
 /** Prefetchable Support Enum */
 enum ePrefetchableSupport
